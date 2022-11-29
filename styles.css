@@ -1,0 +1,271 @@
+/*Styles for Midterm Project*/
+
+/*general*/
+
+@import url("https://fonts.googleapis.com/css2?family=Grandstander&display=swap");
+
+body {
+  font-family: "Grandstander";
+  width: 98%;
+  margin: auto;
+  font-weight: lighter;
+  color: black;
+  background: rgb(174, 238, 187);
+  background: linear-gradient(
+    0deg,
+    rgba(174, 238, 187, 1) 0%,
+    rgba(169, 227, 255, 1) 100%
+  );
+}
+
+main {
+  margin: auto;
+  width: 98%;
+}
+
+.hidden {
+  display: none;
+}
+
+/*header, text*/
+
+header {
+  color: black;
+  text-align: left;
+  margin-bottom: 0.5em;
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.8em;
+  padding: 0.5em;
+  padding-top: 1em;
+  margin: 0;
+  text-shadow: 2px 2px 5px mediumspringgreen;
+}
+
+header > h2 {
+  font-size: 1.2em;
+  padding: 0.5em;
+  margin: 0;
+}
+
+/*documentation section*/
+
+#documentation p,
+li {
+  font-family: sans-serif;
+}
+
+#instructions_cols {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#instructions_cols > div {
+  width: 32%;
+  /*margin: 10px;*/
+}
+
+#instructions_cols h3,
+#instructions_cols p {
+  text-align: center;
+}
+
+#documentation > h2,
+#documentation h3 {
+  text-shadow: 2px 2px 5px mediumspringgreen;
+}
+
+/*game and inventory section*/
+
+#game_and_inventory {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#game {
+  position: relative;
+  display: block;
+}
+
+#canvas {
+  z-index: -1;
+  margin-bottom: 20px;
+}
+
+/*windows*/
+
+#seed_panel,
+#recipe_book,
+#inventory,
+.achievement {
+  background-color: #c8a480ed;
+  box-sizing: border-box;
+  border-radius: 16px;
+}
+
+/*seed bag panel*/
+
+#seed_panel {
+  position: absolute;
+  z-index: 1;
+  left: 30px;
+  top: 200px;
+  width: 580px;
+  height: 240px;
+  padding: 15px;
+}
+
+#seed_panel > h2,
+#seed_panel > p {
+  text-align: center;
+}
+
+#seed_buttons,
+.recipe_buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.seed_button,
+.recipe_button {
+  box-sizing: border-box;
+  margin: auto;
+}
+
+.seed_button:hover,
+.recipe_button:hover {
+  border: 2px solid forestgreen;
+}
+
+.seed_item {
+  width: 13.33%;
+  font-size: 0.8em;
+  padding: 5px;
+  text-align: center;
+}
+
+/*recipe book panel*/
+
+#recipe_book {
+  position: absolute;
+  z-index: 2;
+  left: 20px;
+  top: 90px;
+  width: 600px;
+  height: 460px;
+  padding: 15px;
+}
+
+#recipe_book > h2,
+#recipe_book > p {
+  text-align: center;
+}
+
+.recipe_item {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  width: 23%;
+  font-size: 0.9em;
+}
+
+.recipe_name {
+  font-weight: bolder;
+  text-decoration: underline;
+  font-size: 1em;
+}
+
+#cant_cook,
+#cant_bake {
+  background: red;
+  color: white;
+  width: 480px;
+  padding: 10px;
+  margin: auto;
+  text-align: center;
+}
+
+/*status window, inventory*/
+
+#inventory {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  height: 620px;
+  margin: 10px;
+  padding-left: 15px;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+#inventory > h2 {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin: 5px;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  text-align: center;
+  text-shadow: 2px 2px 5px mediumspringgreen;
+}
+
+#inventory > h3 {
+  font-size: 1em;
+  margin: 0;
+  padding: 5px;
+}
+
+#inventory > p {
+  font-size: 0.9em;
+}
+
+.inventory_item {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.inventory_item > img {
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.inventory_item > p {
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+#milk_item {
+  margin-left: 10px;
+}
+
+#milk_text {
+  margin-left: 15px;
+}
+
+#profit,
+#current_seed,
+#watering_can {
+  background-color: palegreen;
+}
+
+/*achievement popups*/
+
+.achievement {
+  position: absolute;
+  z-index: 3;
+  left: 80px;
+  top: 230px;
+  width: 480px;
+  height: 180px;
+  padding: 15px;
+  text-align: center;
+}
+
+.achievement > h2 {
+  text-shadow: 2px 2px 5px palegreen;
+}

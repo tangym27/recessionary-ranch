@@ -1,0 +1,31 @@
+Links to all sources for The Recessionary Ranch game
+
+
+Tile Based Design Template Code: https://github.com/craignyu/nyu_interactive_computing_source_code_fall_2022
+
+
+Images:
+
+Character: https://opengameart.org/content/tiny-characters-set
+
+Tileset:
+* Grass, flowers, soil: https://opengameart.org/content/flowers-tileset
+* Grass, water, fences: https://opengameart.org/content/map-tile
+* Stoves, tables: https://opengameart.org/content/roguelike-indoor-pack
+* Plants, growing process: https://opengameart.org/content/lpc-crops
+* Door: https://opengameart.org/content/lpc-windows-doors
+
+Food Dishes:
+* https://opengameart.org/content/64-16x16-food-sprites
+* https://opengameart.org/content/restaurant-food
+* https://opengameart.org/content/lpc-meals
+
+Cow Game:
+* Cow: https://www.freepnglogos.com/images/cow-12940.html
+* Cloud background: https://unsplash.com/photos/yQorCngxzwI
+* Cow dung: https://www.freepnglogos.com/images/poop-20216.html
+* Bucket: https://www.freepnglogos.com/images/bucket-37150.html
+
+Sounds:
+* https://freesound.org/people/supervanz/sounds/434165/
+* https://freesound.org/people/akirawakira/sounds/488683/
