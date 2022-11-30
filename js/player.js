@@ -8,7 +8,7 @@ class Player {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.speed = 3;
+    this.speed = 6;
     this.water = false;
     this.currentSeed = "potatoes";
     // Character tileset has three images in each direction.
@@ -48,6 +48,9 @@ class Player {
           case "stove":
             openMenu();
             break;
+          case "sale":
+            processSale();
+            break;
           case "cow":
             gameState = "cowGame";
             player.y = player.y + tileSize;
@@ -72,6 +75,8 @@ class Player {
             break;
           case "stove":
             openMenu();
+            break;
+          case "sale":
             break;
           case "cow":
             gameState = "cowGame";
@@ -98,6 +103,8 @@ class Player {
           case "stove":
             openMenu();
             break;
+          case "sale":
+            break;
           case "cow":
             gameState = "cowGame";
             player.x = player.x - tileSize;
@@ -123,6 +130,8 @@ class Player {
             break;
           case "stove":
             openMenu();
+            break;
+          case "sale":
             break;
           case "cow":
             gameState = "cowGame";
@@ -202,4 +211,14 @@ class Player {
 function setPlayerSeed(seed) {
   player.currentSeed = seed;
   seed_panel.classList.add("hidden");
+}
+
+function processSale() {
+  let plotIndex = Math.round(player.x / 32);
+  let plotRange = Math.round(player.y / 32);
+  let numPlots = 6;
+  for (let i = numPlots; i > 1; i--) {
+    plantWorld[plotRange - i][plotIndex].id = 12;
+  }
+  plantWorld[plotRange - 1][plotIndex].id = 3;
 }

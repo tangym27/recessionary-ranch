@@ -102,9 +102,6 @@ function preload() {
   strawberryJamPic = loadImage("images/rb_strawberryjam.png");
   slicedWatermelonPic = loadImage("images/rb_watermelon.png");
 
-  cowBGM = createAudio("bgm/cowBGM.wav");
-  mainBGM = createAudio("bgm/mainBGM.mp3");
-
   startScreenArt = [
     potatoPic,
     tomatoPic,
@@ -170,14 +167,12 @@ function setup() {
       new StartScreenFood(40 + (i - 8) * 72, 460, startScreenArt[i], 50, 50)
     );
   }
-  gameState = "startScreen";
+  gameState = "farming";
 }
 
 function draw() {
   if (gameState == "startScreen") {
     background(169, 227, 255);
-    mainBGMStart = false;
-    cowBGMStart = false;
 
     // text
     textAlign(LEFT);
@@ -193,13 +188,6 @@ function draw() {
       startScreenObjects[i].displayAndJitter();
     }
   } else if (gameState == "farming") {
-    cowBGMStart = false;
-    cowBGM.pause();
-    if (mainBGMStart == false) {
-      mainBGM.volume(0.1);
-      mainBGM.loop();
-      mainBGMStart = true;
-    }
     displayBackground();
     displayRecipes();
     displayStoves();
@@ -225,14 +213,6 @@ function draw() {
       document.getElementById("achievement4").classList.remove("hidden");
     }
   } else if (gameState == "cowGame") {
-    mainBGMStart = false;
-    mainBGM.pause();
-    if (cowBGMStart == false) {
-      cowBGM.volume(0.1);
-      cowBGM.loop();
-      cowBGMStart = true;
-    }
-
     image(cloud, 0, 0);
     cowGameStart();
   } else if (gameState == "endCowGame") {
