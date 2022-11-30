@@ -167,7 +167,7 @@ function setup() {
       new StartScreenFood(40 + (i - 8) * 72, 460, startScreenArt[i], 50, 50)
     );
   }
-  gameState = "startScreen";
+  gameState = "farming";
 }
 
 function draw() {
