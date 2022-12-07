@@ -56,7 +56,7 @@ let milks = [];
 let poops = [];
 let myBucket;
 
-//soundFile variables
+// soundFile variables
 let mainBGM;
 let cowBGM;
 let mainBGMStart = false;
@@ -171,6 +171,8 @@ function setup() {
 }
 
 function draw() {
+  clear();
+
   if (gameState == "startScreen") {
     background(169, 227, 255);
 
@@ -284,6 +286,10 @@ function keyPressed() {
   if (key == "Escape") {
     closeAchievement();
   }
+
+  if (key == "v") {
+    swapCanvasIframe();
+  }
 }
 
 // Start Screen says "Click anywhere to begin" -
@@ -324,6 +330,17 @@ function closeAchievement() {
   if (cookedSet.size >= 8) {
     document.getElementById("achievement4").classList.add("hidden");
     achievement4 = true;
+  }
+}
+
+// switches between the farming game canvas and VR iframe
+function swapCanvasIframe() {
+  if (document.getElementById("canvas").classList.contains("hidden")) {
+    document.getElementById("canvas").classList.remove("hidden");
+    document.getElementById("vr").classList.add("hidden");
+  } else {
+    document.getElementById("canvas").classList.add("hidden");
+    document.getElementById("vr").classList.remove("hidden");
   }
 }
 

@@ -52,10 +52,11 @@ class Player {
             processSale();
             break;
           case "cow":
-            gameState = "cowGame";
+            // gameState = "cowGame";
             player.y = player.y + tileSize;
             this.graphic = [0, 4, 8][this.graphicOffset];
             this.direction = "down";
+            swapCanvasIframe();
             break;
         }
         break;
@@ -79,10 +80,11 @@ class Player {
           case "sale":
             break;
           case "cow":
-            gameState = "cowGame";
+            // gameState = "cowGame";
             player.y = player.y - tileSize;
             this.graphic = [2, 6, 10][this.graphicOffset];
             this.direction = "up";
+            swapCanvasIframe();
             break;
         }
         break;
@@ -106,11 +108,11 @@ class Player {
           case "sale":
             break;
           case "cow":
-            gameState = "cowGame";
+            // gameState = "cowGame";
             player.x = player.x - tileSize;
             this.graphic = [3, 7, 11][this.graphicOffset];
             this.direction = "left";
-            cowGameState = true;
+            swapCanvasIframe();
             break;
         }
         break;
@@ -134,10 +136,11 @@ class Player {
           case "sale":
             break;
           case "cow":
-            gameState = "cowGame";
+            // gameState = "cowGame";
             player.x = player.x - 5;
             this.graphic = [3, 7, 11][this.graphicOffset];
             this.direction = "left";
+            swapCanvasIframe();
             break;
         }
         break;
