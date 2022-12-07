@@ -96,6 +96,11 @@ li {
   margin-bottom: 20px;
 }
 
+#vr {
+  margin-bottom: 20px;
+  border: none;
+}
+
 /*windows*/
 
 #seed_panel,
