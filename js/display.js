@@ -64,6 +64,21 @@ let crops = {
   carrots: [5, 17, 29, 41, 53],
 };
 
+let cropsList = Object.keys(crops);
+// Show off all seeds.
+function displayRecipes() {
+  let first = ["potatoes", "strawberries", "tomatoes"];
+  let second = ["lettuce", "pumpkins", "watermelons", "carrots"];
+  for (let i = 0; i < 3; i++) {
+    let r = crops[first[i]];
+    drawTile(r[2], 1, tileSize * i, 0.8);
+  }
+  for (let i = 0; i < 4; i++) {
+    let r = crops[second[i]];
+    drawTile(r[2], tileSize * 7 + 3, tileSize * i, 0.8);
+  }
+}
+
 // draw background
 function displayBackground() {
   for (let y = 0; y < bkworld.length; y++) {
@@ -101,7 +116,10 @@ function drawWorld() {
 }
 
 // drawing using the main tileset (background designs)
-function drawTile(id, screenX, screenY) {
+function drawTile(id, screenX, screenY, progress) {
+  if (progress == undefined) {
+    progress = 1;
+  }
   let tilesPerRow = int(tilesetArtwork.width / tileSize);
   let imageX = int(id % tilesPerRow) * tileSize;
   let imageY = int(id / tilesPerRow) * tileSize;
@@ -110,8 +128,8 @@ function drawTile(id, screenX, screenY) {
     tilesetArtwork,
     screenX,
     screenY,
-    tileSize,
-    tileSize,
+    tileSize * progress,
+    tileSize * progress,
     imageX,
     imageY,
     tileSize,
@@ -174,6 +192,8 @@ function getState(screenX, screenY) {
     return "cow";
   } else if (id == 39) {
     return "sale";
+  } else if (id == 37) {
+    return "seedSale";
   } else if (id > 5 && id != 49 && id != 51) {
     return "plant";
   }
