@@ -1,7 +1,7 @@
 // Player Variables
 let player;
 let playerId = 4;
-let profit = 0;
+let profit = 50;
 
 class Player {
   // Players have a default speed, do not carry a water can, and will grow potatoes
@@ -51,6 +51,9 @@ class Player {
           case "sale":
             processSale();
             break;
+          case "seedSale":
+            processSeedSale();
+            break;
           case "cow":
             // gameState = "cowGame";
             player.y = player.y + tileSize;
@@ -78,6 +81,9 @@ class Player {
             openMenu();
             break;
           case "sale":
+            break;
+          case "seedSale":
+            processSeedSale();
             break;
           case "cow":
             // gameState = "cowGame";
@@ -107,6 +113,9 @@ class Player {
             break;
           case "sale":
             break;
+          case "seedSale":
+            processSeedSale();
+            break;
           case "cow":
             // gameState = "cowGame";
             player.x = player.x - tileSize;
@@ -134,6 +143,9 @@ class Player {
             openMenu();
             break;
           case "sale":
+            break;
+          case "seedSale":
+            processSeedSale();
             break;
           case "cow":
             // gameState = "cowGame";
@@ -217,11 +229,33 @@ function setPlayerSeed(seed) {
 }
 
 function processSale() {
-  let plotIndex = Math.round(player.x / 32);
-  let plotRange = Math.round(player.y / 32);
-  let numPlots = 6;
-  for (let i = numPlots; i > 1; i--) {
-    plantWorld[plotRange - i][plotIndex].id = 12;
+  if (profit >= 20) {
+    let plotIndex = Math.round(player.x / 32);
+    let plotRange = Math.round(player.y / 32);
+    let numPlots = 6;
+    for (let i = numPlots; i > 1; i--) {
+      plantWorld[plotRange - i][plotIndex].id = 12;
+    }
+    plantWorld[plotRange - 1][plotIndex].id = 3;
+    profit -= 20;
+  } else {
+    console.log("Not enough money!");
   }
-  plantWorld[plotRange - 1][plotIndex].id = 3;
+}
+
+function processSeedSale() {
+  if (profit >= 1) {
+    let plotIndex = Math.round(player.x / 32);
+    let plotRange = Math.round(player.y / 32);
+    if (plotIndex == 1) {
+      // first three
+      seedInventory[cropsList[plotRange]]++;
+    } else {
+      // last four
+      seedInventory[cropsList[3 + plotRange]]++;
+    }
+    profit -= 1;
+  } else {
+    console.log("Not enough money!");
+  }
 }

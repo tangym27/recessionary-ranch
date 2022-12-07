@@ -74,6 +74,17 @@ let inventory = {
   milk: 0,
 };
 
+let seedInventory = {
+  potatoes: 5,
+  tomatoes: 5,
+  lettuce: 5,
+  carrots: 5,
+  strawberries: 5,
+  watermelons: 5,
+  pumpkins: 5,
+  milk: 5,
+};
+
 function preload() {
   tilesetArtwork = loadImage("images/fullTileset.png");
   characterArtwork = loadImage("images/character.png");
@@ -197,7 +208,7 @@ function draw() {
     player.moveAndDisplay();
 
     // achievement popup windows
-    if (profit >= 10 && achievement1 == false) {
+    if (profit >= 100 && achievement1 == false) {
       document.getElementById("achievement1").classList.remove("hidden");
     }
 
@@ -224,6 +235,7 @@ function draw() {
 
 // HTML interactions
 function displayInventory() {
+  // inventory
   document.getElementById("potatoes_inventory").innerHTML =
     inventory["potatoes"];
   document.getElementById("tomato_inventory").innerHTML = inventory["tomatoes"];
@@ -236,6 +248,22 @@ function displayInventory() {
   document.getElementById("pumpkin_inventory").innerHTML =
     inventory["pumpkins"];
   document.getElementById("milk_inventory").innerHTML = inventory["milk"];
+
+  // seed inventory
+  document.getElementById("potatoes_seed_inventory").innerHTML =
+    seedInventory["potatoes"];
+  document.getElementById("tomatoes_seed_inventory").innerHTML =
+    seedInventory["tomatoes"];
+  document.getElementById("lettuce_seed_inventory").innerHTML =
+    seedInventory["lettuce"];
+  document.getElementById("carrots_seed_inventory").innerHTML =
+    seedInventory["carrots"];
+  document.getElementById("strawberries_seed_inventory").innerHTML =
+    seedInventory["strawberries"];
+  document.getElementById("watermelons_seed_inventory").innerHTML =
+    seedInventory["watermelons"];
+  document.getElementById("pumpkins_seed_inventory").innerHTML =
+    seedInventory["pumpkins"];
 
   if (player.water) {
     document.getElementById("watering_can").innerHTML = "full";
