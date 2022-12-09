@@ -358,10 +358,6 @@ function keyPressed() {
     }
   }
 
-  if (key == "z") {
-    finishSelling(player.middleX, player.up);
-  }
-
   if (key == "Escape") {
     closeAchievement();
   }
