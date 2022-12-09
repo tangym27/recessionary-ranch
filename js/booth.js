@@ -52,6 +52,7 @@ function sellOnBooth(recipe) {
   let boothNum = constrain(int(map(player.x, 48, 180, 0, 4)), 0, 3);
 
   let booth = booths[boothNum];
+  turnOnNPC(boothNum);
   if (booth.on) {
     return false;
   } else {
