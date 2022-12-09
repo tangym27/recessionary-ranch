@@ -164,6 +164,7 @@ function setup() {
   setupPlantWorld();
   setupStoves();
   setupBooths();
+  setupNPC();
 
   // setting up cow game
   cowGameState = false;
@@ -221,6 +222,7 @@ function draw() {
     displayStoves();
     displayInventory();
     displayBooths();
+    displayNPC();
     player.moveAndDisplay();
 
     // achievement popup windows

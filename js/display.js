@@ -156,6 +156,25 @@ function drawPlayer(id, screenX, screenY) {
   );
 }
 
+// drawing using the character tileset (all directions and mvmt of a player)
+function drawNPC(id, screenX, screenY) {
+  let tilesPerRow = int(characterArtwork.width / tileSize);
+  let imageX = int(id % tilesPerRow) * tileSize;
+  let imageY = int(id / tilesPerRow) * tileSize;
+
+  image(
+    NPCArtwork,
+    screenX,
+    screenY,
+    tileSize,
+    tileSize,
+    imageX,
+    imageY,
+    tileSize,
+    tileSize
+  );
+}
+
 // drawing using the food tileset (progress represents how big the image is)
 function drawRecipe(id, screenX, screenY, progress) {
   let tilesPerRow = int(foodArtwork.width / tileSize);
