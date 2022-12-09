@@ -102,7 +102,7 @@ li {
 }
 
 /*windows*/
-
+#cooked_inventory,
 #seed_panel,
 #recipe_book,
 #inventory,
@@ -194,6 +194,17 @@ li {
   text-align: center;
 }
 
+/* selling/cooking inventory panel*/
+#cooked_inventory {
+  position: absolute;
+  z-index: 3;
+  left: 20px;
+  top: 90px;
+  width: 600px;
+  height: 400px;
+  padding: 15px;
+}
+
 /*status window, inventory*/
 
 #inventory {
@@ -205,6 +216,7 @@ li {
   padding-left: 15px;
   padding-right: 10px;
   padding-top: 10px;
+  overflow: scroll;
 }
 
 #inventory > h2 {

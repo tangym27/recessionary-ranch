@@ -54,6 +54,9 @@ class Player {
           case "seedSale":
             processSeedSale();
             break;
+          case "sellRecipe":
+            openSellingMenu();
+            break;
           case "cow":
             // gameState = "cowGame";
             player.y = player.y + tileSize;
@@ -84,6 +87,9 @@ class Player {
             break;
           case "seedSale":
             processSeedSale();
+            break;
+          case "sellRecipe":
+            openSellingMenu();
             break;
           case "cow":
             // gameState = "cowGame";
@@ -116,6 +122,9 @@ class Player {
           case "seedSale":
             processSeedSale();
             break;
+          case "sellRecipe":
+            openSellingMenu();
+            break;
           case "cow":
             // gameState = "cowGame";
             player.x = player.x - tileSize;
@@ -146,6 +155,9 @@ class Player {
             break;
           case "seedSale":
             processSeedSale();
+            break;
+          case "sellRecipe":
+            openSellingMenu();
             break;
           case "cow":
             // gameState = "cowGame";

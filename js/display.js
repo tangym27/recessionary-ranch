@@ -42,11 +42,11 @@ let world = [
   [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 40, 40, 3, 3, 40, 40, 3, 3],
   [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 40, 40, 3, 3, 40, 40, 3, 3],
   [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 40, 40, 3, 3, 40, 40, 3, 3],
-  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 40, 40, 3, 3, 40, 40, 3, 3],
-  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 39, 39, 3, 3, 39, 39, 3, 3],
-  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 27, 27, 27, 27, 27, 27, 27, 27, 3],
-  [3, 3, 12, 12, 3, 3, 12, 12, 3, 3, 3, 50, 50, 50, 50, 50, 50, 50, 50, 3],
+  [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 40, 40, 3, 3, 40, 40, 3, 3],
+  [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 39, 39, 3, 3, 39, 39, 3, 3],
+  [3, 3, 52, 52, 52, 52, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+  [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 27, 27, 27, 27, 27, 27, 27, 27, 3],
+  [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 50, 50, 50, 50, 50, 50, 50, 50, 3],
   [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
 ];
 
@@ -156,6 +156,25 @@ function drawPlayer(id, screenX, screenY) {
   );
 }
 
+// drawing using the character tileset (all directions and mvmt of a player)
+function drawNPC(id, screenX, screenY) {
+  let tilesPerRow = int(characterArtwork.width / tileSize);
+  let imageX = int(id % tilesPerRow) * tileSize;
+  let imageY = int(id / tilesPerRow) * tileSize;
+
+  image(
+    NPCArtwork,
+    screenX,
+    screenY,
+    tileSize,
+    tileSize,
+    imageX,
+    imageY,
+    tileSize,
+    tileSize
+  );
+}
+
 // drawing using the food tileset (progress represents how big the image is)
 function drawRecipe(id, screenX, screenY, progress) {
   let tilesPerRow = int(foodArtwork.width / tileSize);
@@ -194,6 +213,8 @@ function getState(screenX, screenY) {
     return "sale";
   } else if (id == 37) {
     return "seedSale";
+  } else if (id == 52) {
+    return "sellRecipe";
   } else if (id > 5 && id != 49 && id != 51) {
     return "plant";
   }

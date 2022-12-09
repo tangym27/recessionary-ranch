@@ -280,6 +280,125 @@
             </div>
           </div>
 
+          <div id="cooked_inventory" class="hidden">
+            <h2>Cooked Inventory</h2>
+            <p>Click the image for the recipe you want to sell.</p>
+            <div id="recipes">
+              <div class="recipe_buttons">
+                <div class="recipe_item">
+                  <input
+                    class="recipe_button"
+                    type="image"
+                    src="images/rb_bakedpotato.png"
+                    width="50"
+                    height="50"
+                    alt="click to cook baked potatoes"
+                    onclick="sell('baked potatoes');"
+                  />
+                  <p>
+                    <span class="recipe_name">Baked Potatoes ($8)</span><br />
+                  </p>
+                </div>
+                <div class="recipe_item">
+                  <input
+                    class="recipe_button"
+                    type="image"
+                    src="images/rb_strawberryjam.png"
+                    width="50"
+                    height="50"
+                    alt="click to cook strawberry jam"
+                    onclick="sell('strawberry jam');"
+                  />
+                  <p>
+                    <span class="recipe_name">Strawberry Jam ($10)</span><br />
+                  </p>
+                </div>
+                <div class="recipe_item">
+                  <input
+                    class="recipe_button"
+                    type="image"
+                    src="images/rb_watermelon.png"
+                    width="50"
+                    height="50"
+                    alt="click to cook sliced watermelons"
+                    onclick="sell('sliced watermelons');"
+                  />
+                  <p>
+                    <span class="recipe_name">Sliced Watermelons ($5)</span
+                    ><br />
+                  </p>
+                </div>
+                <div class="recipe_item">
+                  <input
+                    class="recipe_button"
+                    type="image"
+                    src="images/rb_salad.png"
+                    width="50"
+                    height="50"
+                    alt="click to cook salad"
+                    onclick="sell('salad');"
+                  />
+                  <p><span class="recipe_name"> Salad ($9)</span><br /></p>
+                </div>
+              </div>
+
+              <div class="recipe_buttons">
+                <div class="recipe_item">
+                  <input
+                    class="recipe_button"
+                    type="image"
+                    src="images/rb_kebab.png"
+                    width="50"
+                    height="50"
+                    alt="click to cook kebabs"
+                    onclick="sell('kebabs');"
+                  />
+                  <p><span class="recipe_name"> Kebabs ($11)</span><br /></p>
+                </div>
+                <div class="recipe_item">
+                  <input
+                    class="recipe_button"
+                    type="image"
+                    src="images/rb_sandwich.png"
+                    width="50"
+                    height="50"
+                    alt="click to cook sandwich"
+                    onclick="sell('sandwich');"
+                  />
+                  <p><span class="recipe_name"> Sandwich ($7)</span><br /></p>
+                </div>
+                <div class="recipe_item">
+                  <input
+                    class="recipe_button"
+                    type="image"
+                    src="images/rb_pumpkinpie.png"
+                    width="50"
+                    height="50"
+                    alt="click to cook pumpkin pie"
+                    onclick="sell('pumpkin pie');"
+                  />
+                  <p>
+                    <span class="recipe_name"> Pumpkin Pie ($18)</span><br />
+                  </p>
+                </div>
+                <div class="recipe_item">
+                  <input
+                    class="recipe_button"
+                    type="image"
+                    src="images/rb_carrotcake.png"
+                    width="50"
+                    height="50"
+                    alt="click to cook carrot cake"
+                    onclick="sell('carrot cake');"
+                  />
+                  <p>
+                    <span class="recipe_name"> Carrot Cake ($18) </span><br />
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div id="achievement1" class="achievement hidden">
             <h2>Congratulations!</h2>
             <h3>You've earned $10 in profit!</h3>
@@ -347,6 +466,39 @@
             <img src="images/milk.png" width="13" height="37" alt="milk icon" />
             <p id="milk_text">Milk: <span id="milk_inventory">0</span></p>
           </div>
+
+          <div class="inventory_item">
+            <img src="images/rb_bakedpotato.png" width="32" height="32" />
+            <p>Baked Potatoes: <span id="baked_potatoes">0</span></p>
+          </div>
+          <div class="inventory_item">
+            <img src="images/rb_strawberryjam.png" width="32" height="32" />
+            <p>Strawberry Jam: <span id="strawberry_jam">0</span></p>
+          </div>
+          <div class="inventory_item">
+            <img src="images/rb_watermelon.png" width="32" height="32" />
+            <p>Sliced Watermelon: <span id="sliced_watermelons">0</span></p>
+          </div>
+          <div class="inventory_item">
+            <img src="images/rb_salad.png" width="32" height="32" />
+            <p>Salad: <span id="salad">0</span></p>
+          </div>
+          <div class="inventory_item">
+            <img src="images/rb_kebab.png" width="32" height="32" />
+            <p>Kebabs: <span id="kebabs">0</span></p>
+          </div>
+          <div class="inventory_item">
+            <img src="images/rb_sandwich.png" width="32" height="32" />
+            <p>Sandwiches: <span id="sandwich">0</span></p>
+          </div>
+          <div class="inventory_item">
+            <img src="images/rb_pumpkinpie.png" width="32" height="32" />
+            <p>Pumpkin Pie: <span id="pumpkin_pie">0</span></p>
+          </div>
+          <div class="inventory_item">
+            <img src="images/rb_carrotcake.png" width="32" height="32" />
+            <p>Carrot Cake: <span id="carrot_cake">0</span></p>
+          </div>
         </div>
       </div>
 
@@ -354,8 +506,10 @@
       <script src="js/recipe.js"></script>
       <script src="js/display.js"></script>
       <script src="js/player.js"></script>
+      <script src="js/NPC.js"></script>
       <script src="js/plant.js"></script>
       <script src="js/stove.js"></script>
+      <script src="js/booth.js"></script>
       <script src="js/cowGame.js"></script>
     </main>
   </body>
