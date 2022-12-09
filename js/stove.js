@@ -24,8 +24,8 @@ class Stove {
     this.on = false;
     this.id = 48;
 
-    profit += this.recipe.price;
     cookedSet.add(this.recipe.name);
+    cookedInventory[this.recipe.name]++;
   }
 
   // Show development of cooking

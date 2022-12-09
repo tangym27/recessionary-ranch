@@ -36,6 +36,16 @@ class Recipe {
     cant_cook.classList.add("hidden");
     return false;
   }
+
+  // TODO: comments
+  canSell() {
+    console.log(this.name);
+    return cookedInventory[this.name] > 0;
+  }
+
+  sell(inventory) {
+    sellOnBooth(this);
+  }
 }
 
 // Configure all of the recipes

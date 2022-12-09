@@ -3,6 +3,7 @@ let canvas;
 // Inventory Variables
 const seed_panel = document.getElementById("seed_panel");
 const recipe_book = document.getElementById("recipe_book");
+const cooked_inventory = document.getElementById("cooked_inventory");
 const cant_cook = document.getElementById("cant_cook");
 const cant_bake = document.getElementById("cant_bake");
 const seeds = document.getElementById("seeds");
@@ -15,7 +16,8 @@ let tilesetArtwork,
   cowPic,
   milkPic,
   poopPic,
-  bucketPic;
+  bucketPic,
+  NPCArtwork;
 
 // Start Screen artwork variables
 let carrotPic,
@@ -64,14 +66,14 @@ let cowBGMStart = false;
 
 // Player inventory - increases when harvesting and decreases when cooking
 let inventory = {
-  potatoes: 0,
-  tomatoes: 0,
-  lettuce: 0,
-  carrots: 0,
-  strawberries: 0,
-  watermelons: 0,
-  pumpkins: 0,
-  milk: 0,
+  potatoes: 10,
+  tomatoes: 10,
+  lettuce: 10,
+  carrots: 10,
+  strawberries: 10,
+  watermelons: 10,
+  pumpkins: 10,
+  milk: 10,
 };
 
 let seedInventory = {
@@ -85,8 +87,20 @@ let seedInventory = {
   milk: 5,
 };
 
+let cookedInventory = {
+  "baked potatoes": 1,
+  "strawberry jam": 1,
+  "sliced watermelons": 1,
+  salad: 1,
+  kebabs: 1,
+  sandwich: 1,
+  "pumpkin pie": 1,
+  "carrot cake": 1,
+};
+
 function preload() {
-  tilesetArtwork = loadImage("images/fullTileset.png");
+  tilesetArtwork = loadImage("images/tileset2.png");
+  NPCArtwork = loadImage("images/npc.png");
   characterArtwork = loadImage("images/character.png");
   foodArtwork = loadImage("images/food.png");
   cloud = loadImage("images/cloud.png");
@@ -149,6 +163,7 @@ function setup() {
   setupRecipes();
   setupPlantWorld();
   setupStoves();
+  setupBooths();
 
   // setting up cow game
   cowGameState = false;
@@ -205,6 +220,7 @@ function draw() {
     displayRecipes();
     displayStoves();
     displayInventory();
+    displayBooths();
     player.moveAndDisplay();
 
     // achievement popup windows
@@ -248,6 +264,21 @@ function displayInventory() {
   document.getElementById("pumpkin_inventory").innerHTML =
     inventory["pumpkins"];
   document.getElementById("milk_inventory").innerHTML = inventory["milk"];
+
+  // cooked inventory
+  document.getElementById("baked_potatoes").innerHTML =
+    cookedInventory["baked potatoes"];
+  document.getElementById("strawberry_jam").innerHTML =
+    cookedInventory["strawberry jam"];
+  document.getElementById("sliced_watermelons").innerHTML =
+    cookedInventory["sliced watermelons"];
+  document.getElementById("salad").innerHTML = cookedInventory["salad"];
+  document.getElementById("kebabs").innerHTML = cookedInventory["kebabs"];
+  document.getElementById("sandwich").innerHTML = cookedInventory["sandwich"];
+  document.getElementById("pumpkin_pie").innerHTML =
+    cookedInventory["pumpkin pie"];
+  document.getElementById("carrot_cake").innerHTML =
+    cookedInventory["carrot cake"];
 
   // seed inventory
   document.getElementById("potatoes_seed_inventory").innerHTML =
@@ -294,6 +325,20 @@ function cook(tempRecipe) {
   }
 }
 
+// From HTML button, sell something based on table availability.
+function sell(tempRecipe) {
+  let recipe = getRecipe(tempRecipe);
+  // TODO: error message if you can't sell something bc inventory or space
+  let canSell = recipe.canSell();
+  if (canSell) {
+    cooked_inventory.classList.add("hidden");
+    let canBake = recipe.sell(inventory);
+  } else {
+    console.log("no inventory to sell");
+    return;
+  }
+}
+
 // User interactions - space for most interactions,
 // p to visit seeds, escape for exiting out of achievement popups
 function keyPressed() {
@@ -309,6 +354,10 @@ function keyPressed() {
     } else {
       seed_panel.classList.add("hidden");
     }
+  }
+
+  if (key == "z") {
+    finishSelling(player.middleX, player.up);
   }
 
   if (key == "Escape") {
@@ -336,6 +385,21 @@ function openMenu() {
     recipe_book.classList.remove("hidden");
     seed_panel.classList.add("hidden");
   } else {
+    recipe_book.classList.add("hidden");
+    cant_cook.classList.add("hidden");
+    cant_bake.classList.add("hidden");
+  }
+}
+
+// Shows off cooked_inventory to sell
+function openSellingMenu() {
+  if (cooked_inventory.classList.contains("hidden")) {
+    closeAchievement();
+    recipe_book.classList.add("hidden");
+    seed_panel.classList.add("hidden");
+    cooked_inventory.classList.remove("hidden");
+  } else {
+    cooked_inventory.classList.add("hidden");
     recipe_book.classList.add("hidden");
     cant_cook.classList.add("hidden");
     cant_bake.classList.add("hidden");

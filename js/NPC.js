@@ -3,14 +3,12 @@ let player;
 let playerId = 4;
 let profit = 50;
 
-class Player {
+class NPC {
   // Players have a default speed, do not carry a water can, and will grow potatoes
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.speed = 6;
-    this.water = false;
-    this.currentSeed = "potatoes";
+    this.speed = 2;
     // Character tileset has three images in each direction.
     // Offset allows us to fluctuate between all three to mimic the animation of walking
     this.graphicOffset = 0;
@@ -223,51 +221,7 @@ class Player {
       this.graphicOffset = 0;
     }
 
-    drawPlayer(this.graphic, this.x, this.y);
-
-    // Close recipe book when out of range of the stoves
-    if (this.y < 80 || this.y > 110 || this.x < 40 || this.x > 180) {
-      recipe_book.classList.add("hidden");
-      cant_cook.classList.add("hidden");
-      cant_bake.classList.add("hidden");
-    }
+    drawNPC(this.graphic, this.x, this.y);   
   }
 }
 
-// From the HTML buttons, update what a player grows
-function setPlayerSeed(seed) {
-  player.currentSeed = seed;
-  seed_panel.classList.add("hidden");
-}
-
-function processSale() {
-  if (profit >= 20) {
-    let plotIndex = Math.round(player.x / 32);
-    let plotRange = Math.round(player.y / 32);
-    let numPlots = 6;
-    for (let i = numPlots; i > 1; i--) {
-      plantWorld[plotRange - i][plotIndex].id = 12;
-    }
-    plantWorld[plotRange - 1][plotIndex].id = 3;
-    profit -= 20;
-  } else {
-    console.log("Not enough money!");
-  }
-}
-
-function processSeedSale() {
-  if (profit >= 1) {
-    let plotIndex = Math.round(player.x / 32);
-    let plotRange = Math.round(player.y / 32);
-    if (plotIndex == 1) {
-      // first three
-      seedInventory[cropsList[plotRange]]++;
-    } else {
-      // last four
-      seedInventory[cropsList[3 + plotRange]]++;
-    }
-    profit -= 1;
-  } else {
-    console.log("Not enough money!");
-  }
-}
