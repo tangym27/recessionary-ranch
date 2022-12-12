@@ -26,13 +26,16 @@ class NPC {
   moveAndDisplay() {
     this.computeSensors();
 
-    if (this.y >= height){
+    if (this.y >= plantWorld.length * tileSize){
       if (this.on){
         this.direction = "up";
+      } else {
+        this.y = (plantWorld.length + 1)* tileSize;
       }
     }
-    if (this.y <= height - 96){
-      finishSelling(this.middleX, this.up + 32);
+
+    if (this.y <= plantWorld.length * tileSize - 96){
+      finishSelling(this.middleX, this.up + tileSize);
       this.on = false;
       this.direction = "down"
     }
@@ -41,6 +44,7 @@ class NPC {
       this.y -= this.speed;
       this.graphic = [2, 6, 10][this.graphicOffset];
     } else if (this.direction == "down"){
+
       this.y += this.speed;
       this.graphic = [0, 4, 8][this.graphicOffset];
     }
@@ -59,7 +63,7 @@ let npcs = [];
 // Configure booths setup
 function setupNPC() {
   for (let x = 2; x < 6; x++) {
-    let temp = new NPC(x * 32, height + 10);
+    let temp = new NPC(x * tileSize, (plantWorld.length + 1) * tileSize);
     npcs.push(temp);
   }
 }
@@ -72,6 +76,5 @@ function displayNPC() {
 }
 
 function turnOnNPC(index){
-  console.log(index);
   npcs[index].on = true;
 }
