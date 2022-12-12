@@ -52,7 +52,7 @@ function setupStoves() {
 // Show off the stoves
 function displayStoves() {
   for (stove of stoves) {
-    drawTile(stove.id, stove.x * tileSize, stove.y * tileSize);
+    // drawTile(stove.id, stove.x * tileSize, stove.y * tileSize);
     if (stove.on) {
       stove.displayCookingProgress();
     }

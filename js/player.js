@@ -181,7 +181,11 @@ class Player {
         getState(this.right, this.middleY) == "walk" &&
         this.x < width - tileSize
       ) {
-        this.x += this.speed;
+        var slideStatus = requestSlide("left", this.speed);
+        if (!slideStatus) {
+          // move
+          this.x += this.speed;
+        }
       }
       // Fluctuate between the three up images to mimic animation
       this.graphic = [1, 5, 9][this.graphicOffset];
@@ -192,7 +196,10 @@ class Player {
       let id = getTileAtPosition(this.left, this.middleY);
 
       if (getState(this.left, this.middleY) == "walk" && this.x > 0) {
-        this.x -= this.speed;
+        var slideStatus = requestSlide("right", this.speed);
+        if (!slideStatus) {
+          this.x -= this.speed;
+        }
       }
       this.graphic = [3, 7, 11][this.graphicOffset];
       this.direction = "left";
@@ -200,7 +207,12 @@ class Player {
     // Up
     if (keyIsDown(87)) {
       if (getState(this.middleX, this.up) == "walk" && this.y > 0) {
-        this.y -= this.speed;
+
+        var slideStatus = requestSlide("down", this.speed);
+        if (!slideStatus) {
+          this.y -= this.speed;
+        }
+
       }
       this.graphic = [2, 6, 10][this.graphicOffset];
       this.direction = "up";
@@ -212,7 +224,11 @@ class Player {
         getState(this.middleX, this.down) == "walk" &&
         this.y < height - (tileSize + this.speed)
       ) {
-        this.y += this.speed;
+        var slideStatus = requestSlide("up", this.speed);
+        if (!slideStatus) {
+          this.y += this.speed;
+        }
+
       }
       this.graphic = [0, 4, 8][this.graphicOffset];
       this.direction = "down";
@@ -242,8 +258,8 @@ function setPlayerSeed(seed) {
 
 function processSale() {
   if (profit >= 20) {
-    let plotIndex = Math.round(player.x / 32);
-    let plotRange = Math.round(player.y / 32);
+    let plotIndex = Math.round((player.x - offsetX) / 32);
+    let plotRange = Math.round((player.y - offsetY) / 32);
     let numPlots = 6;
     for (let i = numPlots; i > 1; i--) {
       plantWorld[plotRange - i][plotIndex].id = 12;
@@ -257,10 +273,10 @@ function processSale() {
 
 function processSeedSale() {
   if (profit >= 1) {
-    let plotIndex = Math.round(player.x / 32);
-    let plotRange = Math.round(player.y / 32);
+    let plotIndex = Math.round((player.x - offsetX) / 32);
+    let plotRange = Math.round((player.y - offsetY) / 32);
     if (plotIndex == 1) {
-      // first three
+      // first threes
       seedInventory[cropsList[plotRange]]++;
     } else {
       // last four

@@ -18,6 +18,10 @@ body {
   );
 }
 
+#canvas{
+  border: 1px solid black;
+}
+
 main {
   margin: auto;
   width: 98%;

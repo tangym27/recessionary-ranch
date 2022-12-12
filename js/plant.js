@@ -61,6 +61,8 @@ class Plant {
 
 // returns the plant object at a given position
 function getPlant(screenX, screenY) {
+  screenX -= offsetX;
+  screenY -= offsetY;
   let arrayX = int(screenX / tileSize);
   let arrayY = int(screenY / tileSize);
   let p = plantWorld[arrayY][arrayX];
@@ -80,7 +82,7 @@ function setPlant(screenX, screenY) {
 function checkPlant(screenX, screenY) {
   let p = getPlant(screenX, screenY);
   // harvest if possible - reset plant stats as well
-  if (p.id == crops[p.seedName][4] || p.matured) {
+  if (crops[p.seedName] != undefined && p.id == crops[p.seedName][4] || p.matured) {
     inventory[p.seedName]++;
     p.id = dirtId;
     p.seedPosition = -1;
@@ -90,5 +92,7 @@ function checkPlant(screenX, screenY) {
     let remainingTime = p.growthTime - p.currentGrowth;
     p.currentGrowth += remainingTime / 2;
     player.water = false;
+  } else if (crops[p.seedName] == undefined){
+    console.log(p.seedName + " is not a crop");
   }
 }

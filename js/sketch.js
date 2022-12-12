@@ -152,7 +152,7 @@ function preload() {
 }
 
 function setup() {
-  canvas = createCanvas(640, 640).id("canvas");
+  canvas = createCanvas(960, 960).id("canvas");
   canvas.parent("#game");
   background(0);
 
@@ -459,4 +459,75 @@ class StartScreenFood {
       this.goingUp = true;
     }
   }
+}
+
+let offsetX = 0;
+let offsetY = 0;
+
+function requestSlide(direction, speed) {
+
+  if (direction == "left") {
+    // no need to slide if the player is on the left side of the screen
+    if (player.x < width/2) {
+      return false;
+    }
+    // compute the x position of the right-most tile in our level
+    let rightMostX = plantWorld[0].length * tileSize + offsetX;
+    // if that position is off the right edge of the screen then we need to slide
+    if (rightMostX > width) {
+      offsetX -= speed;
+      return true;
+    }
+    // otherwise we have reached the end of the world - no more sliding
+    return false;
+  }
+  if (direction == "right") {
+    // no need to slide if the player is on the right side of the screen
+    if (player.x > width/2) {
+      return false;
+    }
+    // compute the x position of the left-most tile in our level
+    let leftMostX = 0 + offsetX;
+    // if that position is off the left edge of the screen then we need to slide
+    if (leftMostX < 0) {
+      offsetX += speed;
+      return true;
+    }
+    // otherwise we have reached the end of the world - no more sliding
+    return false;
+  }
+
+// left becomes up
+  if (direction == "up") {
+    // no need to slide if the player is on the left side of the screen
+    if (player.y < height/2) {
+      return false;
+    }
+    // compute the x position of the right-most tile in our level
+    let bottomMostY = plantWorld.length * tileSize + offsetY;
+    // if that position is off the right edge of the screen then we need to slide
+    if (bottomMostY > height) {
+      offsetY -= speed;
+      return true;
+    }
+    // otherwise we have reached the end of the world - no more sliding
+    return false;
+  }
+  if (direction == "down") {
+    // no need to slide if the player is on the bottom side of the screen
+    if (player.y > height/2) {
+      return false;
+    }
+    // compute the x position of the left-most tile in our level
+    let topMostY = 0 + offsetY;
+    // if that position is off the left edge of the screen then we need to slide
+    if (topMostY < 0) {
+      offsetY += speed;
+      return true;
+    }
+    // otherwise we have reached the end of the world - no more sliding
+    return false;
+  }
+
+  return false;
 }
