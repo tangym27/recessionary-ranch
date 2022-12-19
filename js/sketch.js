@@ -152,7 +152,7 @@ function preload() {
 }
 
 function setup() {
-  canvas = createCanvas(960, 960).id("canvas");
+  canvas = createCanvas(1280,1280).id("canvas");
   canvas.parent("#game");
   background(0);
 
