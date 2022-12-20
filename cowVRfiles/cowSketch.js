@@ -108,10 +108,9 @@ function draw() {
 	text(bottleCount + " bottles", 50,150);
 	text("Click Yellow Box to Exit!", 50,200);
 
-	if (collectCount  == 50){
+	if (collectCount == 50) {
 	    localStorage.setItem("cowGameOver", "true");
 	}
-	//circle(random(512), random(512), random(5,30));
 }
 
 class cowMilk {
