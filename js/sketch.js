@@ -68,14 +68,14 @@ let cowBGMStart = false;
 
 // Player inventory - increases when harvesting and decreases when cooking
 let inventory = {
-  'potatoes': 10,
-  'tomatoes': 10,
-  'lettuce': 10,
-  'carrots': 10,
-  'strawberries': 10,
-  'watermelons': 10,
-  'pumpkins': 10,
-  'milk': 10,
+  'potatoes': 0,
+  'tomatoes': 0,
+  'lettuce': 0,
+  'carrots': 0,
+  'strawberries': 0,
+  'watermelons': 0,
+  'pumpkins': 0,
+  'milk': 0,
 };
 
 let seedInventory = {
@@ -90,14 +90,14 @@ let seedInventory = {
 };
 
 let cookedInventory = {
-  "baked potatoes": 1,
-  "strawberry jam": 1,
-  "sliced watermelons": 1,
-  salad: 1,
-  kebabs: 1,
-  sandwich: 1,
-  "pumpkin pie": 1,
-  "carrot cake": 1,
+  "baked potatoes": 0,
+  "strawberry jam": 0,
+  "sliced watermelons": 0,
+  salad: 0,
+  kebabs: 0,
+  sandwich: 0,
+  "pumpkin pie": 0,
+  "carrot cake": 0,
 };
 
 function preload() {
@@ -440,9 +440,6 @@ function keyPressed() {
     closeNoSeeds();
   }
 
-  if (key == "v") {
-    swapCanvasIframe();
-  }
 }
 
 // Start Screen says "Click anywhere to begin" -

@@ -1,14 +1,14 @@
 // Player Variables
 let player;
 let playerId = 4;
-let profit = 40;
+let profit = 0;
 
 class Player {
   // Players have a default speed, do not carry a water can, and will grow potatoes
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.speed = 10;
+    this.speed = 4;
     this.water = 0;
     this.currentSeed = "potatoes";
     // Character tileset has three images in each direction.
