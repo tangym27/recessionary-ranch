@@ -6,6 +6,8 @@ const recipe_book = document.getElementById("recipe_book");
 const cooked_inventory = document.getElementById("cooked_inventory");
 const cant_cook = document.getElementById("cant_cook");
 const cant_bake = document.getElementById("cant_bake");
+const cant_sell = document.getElementById("cant_sell");
+const no_seed = document.getElementById("no_seed");
 const seeds = document.getElementById("seeds");
 
 // Artwork Variables
@@ -46,6 +48,7 @@ let gameState, cowGameState;
 let recipe, recipeName, canCook;
 
 // Achievement Variables
+let achievement0 = false;
 let achievement1 = false;
 let achievement2 = false;
 let achievement3 = false;
@@ -226,16 +229,21 @@ function draw() {
     player.moveAndDisplay();
 
     // achievement popup windows
+    if (profit >= 50 && achievement0 == false) {
+      document.getElementById("achievement0").classList.remove("hidden");
+    }
+
     if (profit >= 100 && achievement1 == false) {
+      document.getElementById("achievement0").classList.add("hidden");
       document.getElementById("achievement1").classList.remove("hidden");
     }
 
-    if (profit >= 100 && achievement2 == false) {
+    if (profit >= 500 && achievement2 == false) {
       document.getElementById("achievement1").classList.add("hidden");
       document.getElementById("achievement2").classList.remove("hidden");
     }
 
-    if (profit >= 500 && achievement3 == false) {
+    if (profit >= 1000 && achievement3 == false) {
       document.getElementById("achievement2").classList.add("hidden");
       document.getElementById("achievement3").classList.remove("hidden");
     }
@@ -267,7 +275,7 @@ function displayInventory() {
     inventory["pumpkins"];
   document.getElementById("milk_inventory").innerHTML = inventory["milk"];
 
-  // cooked inventory
+  // cooked inventory = dishes available to sell
   document.getElementById("baked_potatoes").innerHTML =
     cookedInventory["baked potatoes"];
   document.getElementById("strawberry_jam").innerHTML =
@@ -330,13 +338,20 @@ function cook(tempRecipe) {
 // From HTML button, sell something based on table availability.
 function sell(tempRecipe) {
   let recipe = getRecipe(tempRecipe);
-  // TODO: error message if you can't sell something bc inventory or space
+  // if there's enough inventory of this recipe/dish
   let canSell = recipe.canSell();
   if (canSell) {
-    cooked_inventory.classList.add("hidden");
     let canBake = recipe.sell(inventory);
+    // if the booth is empty
+    if (canBake) {
+      cant_sell.classList.add("hidden");
+      cooked_inventory.classList.add("hidden");
+    } else {
+      cant_sell.classList.remove("hidden");
+    }
   } else {
-    console.log("no inventory to sell");
+    // console.log("no inventory to sell");
+    cant_sell.classList.remove("hidden");
     return;
   }
 }
@@ -353,6 +368,7 @@ function keyPressed() {
       seed_panel.classList.remove("hidden");
       recipe_book.classList.add("hidden");
       closeAchievement();
+      closeNoSeeds();
     } else {
       seed_panel.classList.add("hidden");
     }
@@ -360,6 +376,7 @@ function keyPressed() {
 
   if (key == "Escape") {
     closeAchievement();
+    closeNoSeeds();
   }
 
   if (key == "v") {
@@ -380,6 +397,7 @@ function mousePressed() {
 function openMenu() {
   if (recipe_book.classList.contains("hidden")) {
     closeAchievement();
+    closeNoSeeds();
     recipe_book.classList.remove("hidden");
     seed_panel.classList.add("hidden");
   } else {
@@ -393,6 +411,9 @@ function openMenu() {
 function openSellingMenu() {
   if (cooked_inventory.classList.contains("hidden")) {
     closeAchievement();
+    closeNoSeeds();
+
+    cant_sell.classList.add("hidden");
     recipe_book.classList.add("hidden");
     seed_panel.classList.add("hidden");
     cooked_inventory.classList.remove("hidden");
@@ -401,25 +422,36 @@ function openSellingMenu() {
     recipe_book.classList.add("hidden");
     cant_cook.classList.add("hidden");
     cant_bake.classList.add("hidden");
+    cant_sell.classList.add("hidden");
   }
 }
 
 // Closes achievement popups appropriately
 function closeAchievement() {
-  if (profit >= 10) {
-    if (profit >= 200) {
+  if (profit >= 50) {
+    if (profit >= 1000) {
       document.getElementById("achievement3").classList.add("hidden");
       achievement3 = true;
-    } else if (profit >= 100) {
+    } else if (profit >= 500) {
       document.getElementById("achievement2").classList.add("hidden");
       achievement2 = true;
+    } else if (profit >= 100) {
+      document.getElementById("achievement1").classList.add("hidden");
+      achievement1 = true;
     }
-    document.getElementById("achievement1").classList.add("hidden");
-    achievement1 = true;
+    document.getElementById("achievement0").classList.add("hidden");
+    achievement0 = true;
   }
+
   if (cookedSet.size >= 8) {
     document.getElementById("achievement4").classList.add("hidden");
     achievement4 = true;
+  }
+}
+
+function closeNoSeeds() {
+  if (!no_seed.classList.contains("hidden")) {
+    no_seed.classList.add("hidden");
   }
 }
 

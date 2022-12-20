@@ -43,7 +43,7 @@ class Recipe {
   }
 
   sell(inventory) {
-    sellOnBooth(this);
+    return sellOnBooth(this);
   }
 }
 

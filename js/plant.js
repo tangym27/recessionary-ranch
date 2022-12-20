@@ -72,9 +72,12 @@ function getPlant(screenX, screenY) {
 // plants a seed if possible (checks if there is only dirt)
 function setPlant(screenX, screenY) {
   let p = getPlant(screenX, screenY);
-  if (p.id == dirtId && inventory[player.currentSeed] > 0) {
-    inventory[player.currentSeed]--;
+  if (p.id == dirtId && seedInventory[player.currentSeed] > 0) {
+    seedInventory[player.currentSeed]--;
     p.setSeed(player.currentSeed);
+  } else if (seedInventory[player.currentSeed] <= 0) {
+    no_seed.classList.remove("hidden");
+    document.getElementById("no_seeds").innerHTML = player.currentSeed;
   }
 }
 
