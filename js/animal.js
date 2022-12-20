@@ -82,11 +82,11 @@ let animals = [];
 function setupAnimals() {
   noiseDetail(24);
   for (let x = 0; x < 30; x++) {
-    let temp = new Animal([5,6,7,8], [13,14,15,16], 2.5, 5.5);
+    let temp = new Animal([5,6,7,8], [13,14,15,16], 1.5, 4.5);
     animals.push(temp);
   }
   for (let x = 0; x < 30; x++) {
-    let temp = new Animal([9,10,11,12], [1,2,3,4], 5.5, 7.5);
+    let temp = new Animal([9,10,11,12], [1,2,3,4], 5.5, 7.9);
     animals.push(temp);
   }
 }
