@@ -5,8 +5,8 @@ class Plant {
     if (growthTime == undefined){
       this.arrayX = arrayX;
       this.arrayY = arrayY;
-      // plants will grow every x frames
-      this.growthTime = 300;
+      // plants will grow every 2 minutes
+      this.growthTime = 7200;
       this.currentGrowth = this.growthTime + 1;
       this.id = id;
       // Randomly set certain grasses to display flowers
