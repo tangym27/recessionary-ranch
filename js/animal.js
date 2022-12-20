@@ -1,8 +1,5 @@
-// Player Variables
-
-
 class Animal {
-  // Players have a default speed, do not carry a water can, and will grow potatoes
+  // Animals have a set graphic array and limit on the range of movement
   constructor(arraySetLeft, arraySetRight, minY, maxY) {
     this.x = random(30,34) ;
     this.minX = random(27, 30);
@@ -18,22 +15,23 @@ class Animal {
     if (random([1,2]) == 1){
       this.speed *= -1;
     }
-    // Character tileset has three images in each direction.
+    // Animal tileset has four images in each direction.
     // Offset allows us to fluctuate between all three to mimic the animation of walking
     this.graphicOffset = 0;
 
 
   }
-//     this.x = constrain(this.x + xMovement, 27, 37);
 
   moveAndDisplay() {
+    // Always move the animals left and right
     this.x += this.speed;
 
+    // Slowly move it up and down
     if (random(1,10) < 2){
       this.y += this.ySpeed;
     }
     
-
+    // Constrain within farming area
     if (this.x >= this.maxX){
       this.speed *= -1;
     }
@@ -70,28 +68,27 @@ class Animal {
       this.graphicOffset = 0;
     }
 
-
-
     drawAnimals(this.graphic, this.x * tileSize, this.y * tileSize);   
   }
 }
 
 let animals = [];
 
-// Configure booths setup
+// Configure animals setup
 function setupAnimals() {
-  noiseDetail(24);
+  // Chickens
   for (let x = 0; x < 30; x++) {
     let temp = new Animal([5,6,7,8], [13,14,15,16], 1.5, 4.5);
     animals.push(temp);
   }
+  // Llamas
   for (let x = 0; x < 30; x++) {
     let temp = new Animal([9,10,11,12], [1,2,3,4], 5.5, 7.9);
     animals.push(temp);
   }
 }
 
-// Show off the booths
+// Show off the animals
 function displayAnimals() {
   for (animal of animals) {
     animal.moveAndDisplay();

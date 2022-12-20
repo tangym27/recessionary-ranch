@@ -91,7 +91,6 @@ class Player {
             openSellingMenu();
             break;
           case "cow":
-            // gameState = "cowGame";
             player.y = player.y - tileSize;
             this.graphic = [2, 6, 10][this.graphicOffset];
             this.direction = "up";
@@ -125,7 +124,6 @@ class Player {
             openSellingMenu();
             break;
           case "cow":
-            // gameState = "cowGame";
             player.x = player.x - tileSize;
             this.graphic = [3, 7, 11][this.graphicOffset];
             this.direction = "left";
@@ -159,7 +157,6 @@ class Player {
             openSellingMenu();
             break;
           case "cow":
-            // gameState = "cowGame";
             player.x = player.x - 5;
             this.graphic = [3, 7, 11][this.graphicOffset];
             this.direction = "left";
@@ -182,7 +179,6 @@ class Player {
       ) {
         var slideStatus = requestSlide("left", this.speed);
         if (!slideStatus) {
-          // move
           this.x += this.speed;
         }
       }
@@ -240,12 +236,6 @@ class Player {
 
     drawPlayer(this.graphic, this.x, this.y);
 
-    // Close recipe book when out of range of the stoves
-    // if (this.y < 80 || this.y > 110 || this.x < 40 || this.x > 180) {
-    //   recipe_book.classList.add("hidden");
-    //   cant_cook.classList.add("hidden");
-    //   cant_bake.classList.add("hidden");
-    // }
   }
 }
 
@@ -255,6 +245,8 @@ function setPlayerSeed(seed) {
   seed_panel.classList.add("hidden");
 }
 
+
+// Buy more land to sell
 function processSale() {
   if (profit >= 20) {
     let plotIndex = Math.round((player.x - offsetX) / 32);
@@ -269,8 +261,10 @@ function processSale() {
     // console.log("Not enough money!");
   }
 }
+
 let soldCrop = undefined;
 
+// Buy seeds from seed booth
 function processSeedSale() {
   if (soldCrop == undefined){
     return;
@@ -283,6 +277,7 @@ function processSeedSale() {
   }
 }
 
+// Set what seed to be bought
 function setSeedSale(cropName){
   soldCrop = cropName
 }

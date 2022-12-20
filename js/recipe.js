@@ -37,11 +37,12 @@ class Recipe {
     return false;
   }
 
-  // TODO: comments
+  // Track whether you have the inventory to sell
   canSell() {
     return cookedInventory[this.name] > 0;
   }
 
+  // Sell inventory
   sell(inventory) {
     return sellOnBooth(this);
   }
@@ -76,14 +77,3 @@ function getRecipe(name) {
   return false;
 }
 
-// // Show off all recipes.
-// function displayRecipes() {
-//   for (let i = 0; i < 4; i++) {
-//     let r = recipes[i];
-//     drawRecipe(r.id, 1, tileSize * i, 0.9);
-//   }
-//   for (let i = 0; i < 4; i++) {
-//     let r = recipes[i + 4];
-//     drawRecipe(r.id, tileSize * 7 + 3, tileSize * i, 0.9);
-//   }
-// }
