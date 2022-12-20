@@ -54,6 +54,16 @@ header > h2 {
   margin: 0;
 }
 
+a:link, a:visited {
+  color: black;
+  background-color: mediumspringgreen;
+}
+
+a:hover, a:active {
+  color: black;
+  background-color: forestgreen;
+}
+
 /*documentation section*/
 
 #documentation p,
