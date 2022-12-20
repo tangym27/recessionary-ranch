@@ -8,7 +8,7 @@ class Player {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.speed = 6;
+    this.speed = 14;
     this.water = false;
     this.currentSeed = "potatoes";
     // Character tileset has three images in each direction.
@@ -171,7 +171,7 @@ class Player {
     }
   }
 
-  moveAndDisplay() {
+  moveAndDisplay() {  
     this.computeSensors();
 
     // Right
@@ -270,20 +270,20 @@ function processSale() {
     console.log("Not enough money!");
   }
 }
+let soldCrop = undefined;
 
 function processSeedSale() {
+  if (soldCrop == undefined){
+    return;
+  }
   if (profit >= 1) {
-    let plotIndex = Math.round((player.x - offsetX) / 32);
-    let plotRange = Math.round((player.y - offsetY) / 32);
-    if (plotIndex == 1) {
-      // first threes
-      seedInventory[cropsList[plotRange]]++;
-    } else {
-      // last four
-      seedInventory[cropsList[3 + plotRange]]++;
-    }
+    inventory[soldCrop]++
     profit -= 1;
   } else {
     console.log("Not enough money!");
   }
+}
+
+function setSeedSale(cropName){
+  soldCrop = cropName
 }

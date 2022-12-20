@@ -34,7 +34,7 @@ class NPC {
       }
     }
 
-    if (this.y <= plantWorld.length * tileSize - 96){
+    if (this.y <= plantWorld.length * tileSize - (tileSize * 7)){
       finishSelling(this.middleX, this.up + tileSize);
       this.on = false;
       this.direction = "down"
@@ -62,7 +62,7 @@ let npcs = [];
 
 // Configure booths setup
 function setupNPC() {
-  for (let x = 2; x < 6; x++) {
+  for (let x = 32; x < 39; x++) {
     let temp = new NPC(x * tileSize, (plantWorld.length + 1) * tileSize);
     npcs.push(temp);
   }
