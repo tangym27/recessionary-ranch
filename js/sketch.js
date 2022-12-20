@@ -130,6 +130,8 @@ function preload() {
   strawberryJamPic = loadImage("images/rb_strawberryjam.png");
   slicedWatermelonPic = loadImage("images/rb_watermelon.png");
 
+  mainBGM = createAudio("bgm/mainBGM.mp3");
+
   startScreenArt = [
     potatoPic,
     tomatoPic,
@@ -181,12 +183,12 @@ function setup() {
   // grow plants based on time elapsed since last time played
   if (localStorage.getItem('lastPlayed')) {
     let diff = currentTime - int(localStorage.getItem('lastPlayed'));
-    let frames = (diff*60)/1000;
+    let updatedFrames = (diff*60)/1000;
     for (plantCol of plantWorld) {
       for (plant of plantCol){
         if (plant.id > 5 && plant.id != 49 && plant.id != 51 && 
           plant.id != 24 && plant.id != 25 && plant.id != 26 && plant.id != 36) {
-          plant.currentGrowth += frames;
+          plant.currentGrowth += updatedFrames;
         }
       }
     }
@@ -231,7 +233,7 @@ function setup() {
       new StartScreenFood(40 + (i - 8) * 72, 460, startScreenArt[i], 50, 50)
     );
   }
-  gameState = "farming";
+  gameState = "startScreen";
 }
 
 function draw() {
@@ -239,14 +241,15 @@ function draw() {
   currentTime = new Date().getTime();
 
   if (gameState == "startScreen") {
+    mainBGMStart = false;
     background(169, 227, 255);
 
     // text
     textAlign(LEFT);
     fill(0);
     textFont("Grandstander");
-    textSize(45);
-    text("The Recessionary Ranch", 65, 290);
+    textSize(30);
+    text("The Revamped Recessionary Ranch", 65, 290);
     textSize(25);
     text("Click anywhere to begin farming!", 115, 350);
 
@@ -255,6 +258,11 @@ function draw() {
       startScreenObjects[i].displayAndJitter();
     }
   } else if (gameState == "farming") {
+    if (mainBGMStart == false) {
+      mainBGM.volume(0.1);
+      mainBGM.loop();
+      mainBGMStart = true;
+    }
     displayBackground();
     displayRecipes();
     displayStoves();
@@ -291,6 +299,8 @@ function draw() {
     // check if cow game is over
     cowGameState = localStorage.getItem('cowGameOver');
     if (cowGameState=="true") {
+      mainBGMStart = false;
+      mainBGM.pause();
       swapCanvasIframe();
       localStorage.setItem('cowGameOver', "false");
       localStorage.setItem("cowGameStarted", "true");
@@ -358,7 +368,7 @@ function displayInventory() {
     seedInventory["pumpkins"];
 
   if (player.water) {
-    document.getElementById("watering_can").innerHTML = "full";
+    document.getElementById("watering_can").innerHTML = (player.water * 20) + "% full";
   } else {
     document.getElementById("watering_can").innerHTML = "empty";
   }

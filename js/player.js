@@ -9,7 +9,7 @@ class Player {
     this.x = x;
     this.y = y;
     this.speed = 10;
-    this.water = false;
+    this.water = 0;
     this.currentSeed = "potatoes";
     // Character tileset has three images in each direction.
     // Offset allows us to fluctuate between all three to mimic the animation of walking
@@ -40,7 +40,7 @@ class Player {
             checkPlant(this.middleX, this.up);
             break;
           case "water":
-            this.water = true;
+            this.water = 5;
             break;
           case "food":
             finishCooking(this.middleX, this.up);
@@ -74,7 +74,7 @@ class Player {
             checkPlant(this.middleX, this.down);
             break;
           case "water":
-            this.water = true;
+            this.water = 5;
             break;
           case "food":
             finishCooking(this.middleX, this.down);
@@ -108,7 +108,7 @@ class Player {
             checkPlant(this.left, this.middleY);
             break;
           case "water":
-            this.water = true;
+            this.water = 5;
             break;
           case "food":
             finishCooking(this.left, this.middleY);
@@ -142,7 +142,7 @@ class Player {
             checkPlant(this.right, this.middleY);
             break;
           case "water":
-            this.water = true;
+            this.water = 5;
             break;
           case "food":
             finishCooking(this.right, this.middleY);
