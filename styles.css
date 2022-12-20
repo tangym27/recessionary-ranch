@@ -1,4 +1,4 @@
-/*Styles for Midterm Project*/
+/*Styles for Final Project*/
 
 /*general*/
 
@@ -110,7 +110,8 @@ li {
 #seed_panel,
 #recipe_book,
 #inventory,
-.achievement {
+.achievement,
+#no_seed {
   background-color: #c8a480ed;
   box-sizing: border-box;
   border-radius: 16px;
@@ -124,7 +125,7 @@ li {
   left: 30px;
   top: 200px;
   width: 580px;
-  height: 240px;
+  height: 260px;
   padding: 15px;
 }
 
@@ -188,8 +189,7 @@ li {
   font-size: 1em;
 }
 
-#cant_cook,
-#cant_bake {
+.error {
   background: red;
   color: white;
   width: 480px;
@@ -198,14 +198,14 @@ li {
   text-align: center;
 }
 
-/* selling/cooking inventory panel*/
+/* selling inventory panel*/
 #cooked_inventory {
   position: absolute;
   z-index: 3;
   left: 20px;
   top: 90px;
   width: 600px;
-  height: 400px;
+  height: 430px;
   padding: 15px;
 }
 
@@ -276,7 +276,7 @@ li {
 
 /*achievement popups*/
 
-.achievement {
+.achievement, #no_seed {
   position: absolute;
   z-index: 3;
   left: 80px;
@@ -287,6 +287,6 @@ li {
   text-align: center;
 }
 
-.achievement > h2 {
+.achievement > h2, #no_seed > h2 {
   text-shadow: 2px 2px 5px palegreen;
 }

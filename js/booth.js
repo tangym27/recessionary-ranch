@@ -14,13 +14,13 @@ class Booth {
   sell(recipe) {
     this.on = true;
     this.recipe = recipe;
+    cookedInventory[this.recipe.name]--;
   }
 
   // Reset booth settings
   turnOff() {
     this.on = false;
     profit += this.recipe.price;
-    cookedInventory[this.recipe.name]--;
   }
 
   // Show development of selling
@@ -46,7 +46,7 @@ function displayBooths() {
   }
 }
 
-// Allow for cokoking based on recipe
+// Allow for cooking based on recipe
 function sellOnBooth(recipe) {
   let boothNum = constrain(int(map(player.x + offsetX, -276, -276 + (tileSize * 7), 0, 7)), 0, 7);
   let booth = booths[boothNum];

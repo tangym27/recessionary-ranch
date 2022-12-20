@@ -24,8 +24,7 @@
           <div id="seed_panel" class="hidden">
             <h2>Seed Bag</h2>
             <p>
-              Click the image for the ingredient you want to grow. Numbers
-              represent the current inventory. Buy more ($1/seed) at the table.
+              Click the image for the ingredient you want to grow. You can buy more seeds ($1/seed) at the marketplace's seed stall.
             </p>
             <div id="seeds">
               <div id="seed_buttons">
@@ -41,7 +40,7 @@
                     onclick="setPlayerSeed('potatoes');"
                   />
                   <p>Potatoes</p>
-                  <p><span id="potatoes_seed_inventory">5</span></p>
+                  <p><span id="potatoes_seed_inventory">5</span> seeds</p>
                 </div>
                 <div class="seed_item">
                   <input
@@ -55,7 +54,7 @@
                     onclick="setPlayerSeed('tomatoes');"
                   />
                   <p>Tomatoes</p>
-                  <p><span id="tomatoes_seed_inventory">5</span></p>
+                  <p><span id="tomatoes_seed_inventory">5</span> seeds</p>
                 </div>
                 <div class="seed_item">
                   <input
@@ -69,7 +68,7 @@
                     onclick="setPlayerSeed('lettuce');"
                   />
                   <p>Lettuce</p>
-                  <p><span id="lettuce_seed_inventory">5</span></p>
+                  <p><span id="lettuce_seed_inventory">5</span> seeds</p>
                 </div>
                 <div class="seed_item">
                   <input
@@ -83,7 +82,7 @@
                     onclick="setPlayerSeed('carrots');"
                   />
                   <p>Carrots</p>
-                  <p><span id="carrots_seed_inventory">5</span></p>
+                  <p><span id="carrots_seed_inventory">5</span> seeds</p>
                 </div>
                 <div class="seed_item">
                   <input
@@ -97,7 +96,7 @@
                     onclick="setPlayerSeed('strawberries');"
                   />
                   <p>Strawberries</p>
-                  <p><span id="strawberries_seed_inventory">5</span></p>
+                  <p><span id="strawberries_seed_inventory">5</span> seeds</p>
                 </div>
                 <div class="seed_item">
                   <input
@@ -111,7 +110,7 @@
                     onclick="setPlayerSeed('watermelons');"
                   />
                   <p>Watermelons</p>
-                  <p><span id="watermelons_seed_inventory">5</span></p>
+                  <p><span id="watermelons_seed_inventory">5</span> seeds</p>
                 </div>
                 <div class="seed_item">
                   <input
@@ -125,7 +124,7 @@
                     onclick="setPlayerSeed('pumpkins');"
                   />
                   <p>Pumpkins</p>
-                  <p><span id="pumpkins_seed_inventory">5</span></p>
+                  <p><span id="pumpkins_seed_inventory">5</span> seeds</p>
                 </div>
               </div>
             </div>
@@ -270,19 +269,19 @@
                 </div>
               </div>
 
-              <p id="cant_cook" class="hidden">
+              <p id="cant_cook" class="hidden error">
                 You don't have enough ingredients to cook this recipe!
               </p>
 
-              <p id="cant_bake" class="hidden">
+              <p id="cant_bake" class="hidden error">
                 The stove is currently in use! Please come back later.
               </p>
             </div>
           </div>
 
           <div id="cooked_inventory" class="hidden">
-            <h2>Cooked Inventory</h2>
-            <p>Click the image for the recipe you want to sell.</p>
+            <h2>Dishes to Sell</h2>
+            <p>Click the image for the dish you want to sell.</p>
             <div id="recipes">
               <div class="recipe_buttons">
                 <div class="recipe_item">
@@ -292,11 +291,12 @@
                     src="images/rb_bakedpotato.png"
                     width="50"
                     height="50"
-                    alt="click to cook baked potatoes"
+                    alt="click to sell baked potatoes"
                     onclick="sell('baked potatoes');"
                   />
                   <p>
                     <span class="recipe_name">Baked Potatoes ($8)</span><br />
+                    Can sell: <span id="baked_potatoes">0</span>
                   </p>
                 </div>
                 <div class="recipe_item">
@@ -306,11 +306,12 @@
                     src="images/rb_strawberryjam.png"
                     width="50"
                     height="50"
-                    alt="click to cook strawberry jam"
+                    alt="click to sell strawberry jam"
                     onclick="sell('strawberry jam');"
                   />
                   <p>
                     <span class="recipe_name">Strawberry Jam ($10)</span><br />
+                    Can sell: <span id="strawberry_jam">0</span>
                   </p>
                 </div>
                 <div class="recipe_item">
@@ -320,12 +321,13 @@
                     src="images/rb_watermelon.png"
                     width="50"
                     height="50"
-                    alt="click to cook sliced watermelons"
+                    alt="click to sell sliced watermelons"
                     onclick="sell('sliced watermelons');"
                   />
                   <p>
                     <span class="recipe_name">Sliced Watermelons ($5)</span
                     ><br />
+                    Can sell: <span id="sliced_watermelons">0</span>
                   </p>
                 </div>
                 <div class="recipe_item">
@@ -335,10 +337,12 @@
                     src="images/rb_salad.png"
                     width="50"
                     height="50"
-                    alt="click to cook salad"
+                    alt="click to sell salad"
                     onclick="sell('salad');"
                   />
-                  <p><span class="recipe_name"> Salad ($9)</span><br /></p>
+                  <p><span class="recipe_name"> Salad ($9)</span><br />
+                  Can sell: <span id="salad">0</span>
+                  </p>
                 </div>
               </div>
 
@@ -350,10 +354,11 @@
                     src="images/rb_kebab.png"
                     width="50"
                     height="50"
-                    alt="click to cook kebabs"
+                    alt="click to sell kebabs"
                     onclick="sell('kebabs');"
                   />
-                  <p><span class="recipe_name"> Kebabs ($11)</span><br /></p>
+                  <p><span class="recipe_name"> Kebabs ($11)</span><br />Can sell: <span id="kebabs">0</span>
+                  </p>
                 </div>
                 <div class="recipe_item">
                   <input
@@ -362,10 +367,11 @@
                     src="images/rb_sandwich.png"
                     width="50"
                     height="50"
-                    alt="click to cook sandwich"
+                    alt="click to sell sandwich"
                     onclick="sell('sandwich');"
                   />
-                  <p><span class="recipe_name"> Sandwich ($7)</span><br /></p>
+                  <p><span class="recipe_name"> Sandwich ($7)</span><br />Can sell: <span id="sandwich">0</span>
+                  </p>
                 </div>
                 <div class="recipe_item">
                   <input
@@ -378,7 +384,7 @@
                     onclick="sell('pumpkin pie');"
                   />
                   <p>
-                    <span class="recipe_name"> Pumpkin Pie ($18)</span><br />
+                    <span class="recipe_name"> Pumpkin Pie ($18)</span><br /> Can sell: <span id="pumpkin_pie">0</span>
                   </p>
                 </div>
                 <div class="recipe_item">
@@ -388,32 +394,48 @@
                     src="images/rb_carrotcake.png"
                     width="50"
                     height="50"
-                    alt="click to cook carrot cake"
+                    alt="click to sell carrot cake"
                     onclick="sell('carrot cake');"
                   />
                   <p>
-                    <span class="recipe_name"> Carrot Cake ($18) </span><br />
+                    <span class="recipe_name"> Carrot Cake ($18) </span><br /> Can sell: <span id="carrot_cake">0</span>
                   </p>
                 </div>
               </div>
+
+              <p id="cant_sell" class="hidden error">
+                You're already selling something on this booth, <br>or you don't have any of this dish to sell!
+              </p>
             </div>
           </div>
 
-          <div id="achievement1" class="achievement hidden">
-            <h2>Congratulations!</h2>
-            <h3>You've earned $10 in profit!</h3>
+          <div id="no_seed" class="hidden">
+            <h2>You can't plant any more <span id="no_seeds">potatoes</span>!</h2>
+            <h3>Go to the seed stall to buy more seeds!</h3>
             <p>Press ESC to close this window.</p>
           </div>
 
-          <div id="achievement2" class="achievement hidden">
+          <div id="achievement0" class="achievement hidden">
+            <h2>Congratulations!</h2>
+            <h3>You've earned $50 in profit!</h3>
+            <p>Press ESC to close this window.</p>
+          </div>
+
+          <div id="achievement1" class="achievement hidden">
             <h2>Congratulations!</h2>
             <h3>You've earned $100 in profit!</h3>
             <p>Press ESC to close this window.</p>
           </div>
 
+          <div id="achievement2" class="achievement hidden">
+            <h2>Congratulations!</h2>
+            <h3>You've earned $500 in profit!</h3>
+            <p>Press ESC to close this window.</p>
+          </div>
+
           <div id="achievement3" class="achievement hidden">
             <h2>Congratulations!</h2>
-            <h3>You've earned $200 in profit!</h3>
+            <h3>You've earned $1000 in profit!</h3>
             <p>Press ESC to close this window.</p>
           </div>
 
@@ -465,39 +487,6 @@
           <div class="inventory_item" id="milk_item">
             <img src="images/milk.png" width="13" height="37" alt="milk icon" />
             <p id="milk_text">Milk: <span id="milk_inventory">0</span></p>
-          </div>
-
-          <div class="inventory_item">
-            <img src="images/rb_bakedpotato.png" width="32" height="32" />
-            <p>Baked Potatoes: <span id="baked_potatoes">0</span></p>
-          </div>
-          <div class="inventory_item">
-            <img src="images/rb_strawberryjam.png" width="32" height="32" />
-            <p>Strawberry Jam: <span id="strawberry_jam">0</span></p>
-          </div>
-          <div class="inventory_item">
-            <img src="images/rb_watermelon.png" width="32" height="32" />
-            <p>Sliced Watermelon: <span id="sliced_watermelons">0</span></p>
-          </div>
-          <div class="inventory_item">
-            <img src="images/rb_salad.png" width="32" height="32" />
-            <p>Salad: <span id="salad">0</span></p>
-          </div>
-          <div class="inventory_item">
-            <img src="images/rb_kebab.png" width="32" height="32" />
-            <p>Kebabs: <span id="kebabs">0</span></p>
-          </div>
-          <div class="inventory_item">
-            <img src="images/rb_sandwich.png" width="32" height="32" />
-            <p>Sandwiches: <span id="sandwich">0</span></p>
-          </div>
-          <div class="inventory_item">
-            <img src="images/rb_pumpkinpie.png" width="32" height="32" />
-            <p>Pumpkin Pie: <span id="pumpkin_pie">0</span></p>
-          </div>
-          <div class="inventory_item">
-            <img src="images/rb_carrotcake.png" width="32" height="32" />
-            <p>Carrot Cake: <span id="carrot_cake">0</span></p>
           </div>
         </div>
       </div>

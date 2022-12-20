@@ -267,7 +267,7 @@ function processSale() {
     plantWorld[plotRange - 1][plotIndex].id = 3;
     profit -= 20;
   } else {
-    console.log("Not enough money!");
+    // console.log("Not enough money!");
   }
 }
 let soldCrop = undefined;
@@ -277,10 +277,10 @@ function processSeedSale() {
     return;
   }
   if (profit >= 1) {
-    inventory[soldCrop]++
+    seedInventory[soldCrop]++
     profit -= 1;
   } else {
-    console.log("Not enough money!");
+    // console.log("Not enough money!");
   }
 }
 
