@@ -1,5 +1,5 @@
 let canvas;
-let size = 640;
+let size2 = 640;
 let currentTime = new Date().getTime();
 
 // Inventory Variables
@@ -155,7 +155,7 @@ function preload() {
 }
 
 function setup() {
-  canvas = createCanvas(size, size).id("canvas");
+  canvas = createCanvas(size2, size2).id("canvas");
   canvas.parent("#game");
   background(0);
 
@@ -166,45 +166,53 @@ function setup() {
   setupRecipes();
 
   // check for saved plants
-  // if (localStorage.getItem('plantWorld')) {
-  //   plantWorld = JSON.parse(localStorage.getItem('plantWorld'));
-  // } else {
+  if (localStorage.getItem('plantWorld')) {
+    setupUpdatedPlantWorld(JSON.parse(localStorage.getItem('plantWorld')));
+  } else {
     setupPlantWorld();
-  // }
+  }
+
+  if (localStorage.getItem('stoves')){
+    setupUpdatedStoves(JSON.parse(localStorage.getItem('stoves')));
+  } else {
+    setupStoves();
+  }
 
   // grow plants based on time elapsed since last time played
-  // if (localStorage.getItem('lastPlayed')) {
-  //   let diff = currentTime - int(localStorage.getItem('lastPlayed'));
-  //   let frames = (diff*60)/1000;
-  //   for (plant of plantWorld) {
-  //     if (plant.id > 5 && plant.id != 49 && plant.id != 51 && 
-  //       plant.id != 24 && plant.id != 25 && plant.id != 26 && plant.id != 36) {
-  //       plant.currentGrowth += frames;
-  //     }
-  //   }
-  // }
+  if (localStorage.getItem('lastPlayed')) {
+    let diff = currentTime - int(localStorage.getItem('lastPlayed'));
+    let frames = (diff*60)/1000;
+    for (plantCol of plantWorld) {
+      for (plant of plantCol){
+        if (plant.id > 5 && plant.id != 49 && plant.id != 51 && 
+          plant.id != 24 && plant.id != 25 && plant.id != 26 && plant.id != 36) {
+          plant.currentGrowth += frames;
+        }
+      }
+    }
+  }
 
-  setupStoves();
+
   setupBooths();
   setupNPC();
   setupAnimals();
 
   // get any inventory/profit from previous play
-  // if (localStorage.getItem('seedInventory')) {
-  //   seedInventory = JSON.parse(localStorage.getItem('seedInventory'));
-  // }
-  // if (localStorage.getItem('cookedInventory')) {
-  //   cookedInventory = JSON.parse(localStorage.getItem('cookedInventory'));
-  // }
+  if (localStorage.getItem('seedInventory')) {
+    seedInventory = JSON.parse(localStorage.getItem('seedInventory'));
+  }
+  if (localStorage.getItem('cookedInventory')) {
+    cookedInventory = JSON.parse(localStorage.getItem('cookedInventory'));
+  }
   if (localStorage.getItem('inventory')) {
     inventory = JSON.parse(localStorage.getItem('inventory'));
   }
   if (localStorage.getItem('profit')) {
     profit = int(localStorage.getItem('profit'));
   }
-  // if (localStorage.getItem('achieved')) {
-  //   achieved = JSON.parse(localStorage.getItem('achieved'));
-  // }
+  if (localStorage.getItem('achieved')) {
+    achieved = JSON.parse(localStorage.getItem('achieved'));
+  }
 
   // set up start screen
   for (let i = 0; i < 8; i++) {
@@ -298,6 +306,7 @@ function draw() {
     localStorage.setItem('lastPlayed', currentTime);
     localStorage.setItem('profit', profit);
     localStorage.setItem('achieved', JSON.stringify(achieved));
+    localStorage.setItem('stoves', JSON.stringify(stoves));
   } 
 }
 

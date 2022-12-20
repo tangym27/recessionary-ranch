@@ -1,17 +1,36 @@
+
 class Plant {
-  constructor(x, y, id) {
-    this.arrayX = x;
-    this.arrayY = y;
-    // plants will grow every x frames
-    this.growthTime = 500;
-    this.currentGrowth = this.growthTime + 1;
-    this.id = id;
-    // Randomly set certain grasses to display flowers
-    this.hasFlowers = int(random(1, 10));
-    this.flowerId = random([1, 13, 14, 15, 16]);
-    // tracks plant growing lifespan
-    this.matured = false;
-    this.seedPosition = -1;
+
+  constructor(arrayX, arrayY, id, growthTime, currentGrowth, flowerId, hasFlowers, matured, seedPosition, seedName){
+    if (growthTime == undefined){
+      this.arrayX = arrayX;
+      this.arrayY = arrayY;
+      // plants will grow every x frames
+      this.growthTime = 300;
+      this.currentGrowth = this.growthTime + 1;
+      this.id = id;
+      // Randomly set certain grasses to display flowers
+      this.hasFlowers = int(random(1, 10));
+      this.flowerId = random([1, 13, 14, 15, 16]);
+      // tracks plant growing lifespan
+      this.matured = false;
+      this.seedPosition = -1;
+    } else {
+      this.arrayX = arrayX;
+      this.arrayY = arrayY;
+  
+      this.growthTime = growthTime;
+      this.currentGrowth = currentGrowth;
+      this.id = id;
+      // Randomly set certain grasses to display flowers
+      this.hasFlowers = hasFlowers;
+      this.flowerId = flowerId;
+      // tracks plant growing lifespan
+      this.matured = matured;
+      this.seedPosition = seedPosition;
+      this.seedName = seedName;
+  
+    }  
   }
 
   setId(id) {

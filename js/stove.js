@@ -3,12 +3,22 @@ let stoves = [];
 
 class Stove {
   // constructor for Stove object with progress tracking how cooked something is
-  constructor(x, y) {
-    this.on = false;
-    this.id = 48;
-    this.x = x;
-    this.y = y;
-    this.progress = 0.5;
+  constructor(x, y, on, id, progress, recipe) {
+    if (on == undefined){
+      this.on = false;
+      this.id = 48;
+      this.x = x;
+      this.y = y;
+      this.progress = 0.5;
+    } else {
+      this.on = on;
+      this.id = id;
+      this.x = x;
+      this.y = y;
+      this.progress = progress;
+      this.recipe = recipe;
+    }
+    
   }
 
   // cooks a recipe and marks the stove as used
@@ -45,6 +55,13 @@ class Stove {
 function setupStoves() {
   for (let x = 4; x < 10; x++) {
     let temp = new Stove(x, 5);
+    stoves.push(temp);
+  }
+}
+
+function setupUpdatedStoves(arr) {
+  for (stove of arr) {
+    let temp = new Stove(stove.x, stove.y, stove.on, stove.id, stove.progress, stove.recipe );
     stoves.push(temp);
   }
 }

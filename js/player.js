@@ -1,7 +1,7 @@
 // Player Variables
 let player;
 let playerId = 4;
-let profit = 50;
+let profit = 40;
 
 class Player {
   // Players have a default speed, do not carry a water can, and will grow potatoes
