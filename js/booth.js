@@ -2,7 +2,7 @@
 let booths = [];
 
 class Booth {
-  // constructor for Booth object with progress tracking how selled something is
+  // constructor for Booth object
   constructor(x, y) {
     this.on = false;
     this.x = x;
@@ -46,7 +46,7 @@ function displayBooths() {
   }
 }
 
-// Allow for cooking based on recipe
+// Allow for selling based on booth
 function sellOnBooth(recipe) {
   let boothNum = constrain(int(map(player.x + offsetX, -276, -276 + (tileSize * 7), 0, 7)), 0, 7);
   let booth = booths[boothNum];
@@ -60,7 +60,7 @@ function sellOnBooth(recipe) {
 }
 
 function finishSelling(screenX, screenY) {
-  let boothNum = int(screenX / 32) - 32;
+  let boothNum = constrain(int(screenX / 32) - 32, 0, 6);
   if (booths[boothNum].on) {
     booths[boothNum].turnOff();
   }

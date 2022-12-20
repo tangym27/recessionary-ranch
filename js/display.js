@@ -3,6 +3,9 @@ let tileSize = 32;
 let dirtId = 12;
 let plantProps = [68,69,70,71,81,104,105,106,107];
 
+// ids that players can walk on
+let validIds = [3, 82, 122, 120, 108, 110]
+
 // background layer - all grass
 let bkworld = new Array(41).fill(new Array(41).fill(0));
 
@@ -50,7 +53,6 @@ let world = [
     [77,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,81,81,81,83,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,],
 ];
 
-// booths:  52, 52, 52, 52,
 // dynamic layer - growing seed, plants, etc.
 let plantWorld = [];
 
@@ -65,8 +67,7 @@ let crops = {
     carrots: [5, 17, 29, 41, 53],
 };
 
-let cropsList = Object.keys(crops);
-// Show off all seeds.
+// Show off all recipes.
 function displayRecipes() {
     for (let i = 0; i < 8; i++) {
         let r = recipes[i];
@@ -77,6 +78,7 @@ function displayRecipes() {
 
 // draw background
 function displayBackground() {
+    // Marketplace content
     let tempArray = new Array(22).fill(0);
     for (let j = 0; j < 18; j++) {
         tempArray.push(82);
@@ -84,6 +86,7 @@ function displayBackground() {
     for (let i = 29; i < 40; i++) {
         bkworld[i] = tempArray;
     }
+    // Regular world
     for (let y = 0; y < 41; y++) {
         for (let x = 0; x < 41; x++) {
             if (bkworld[y][x] == undefined) {
@@ -115,6 +118,7 @@ function setupPlantWorld() {
     }
 }
 
+// fills dynamic array with plant objects after local storage
 function setupUpdatedPlantWorld(arr){
     for (let y = 0; y < world.length; y++) {
         let pCol = [];
@@ -134,7 +138,6 @@ function setupUpdatedPlantWorld(arr){
 
 }
 // draws world with dynamic plant objects
-// does not need to be offset bc it is called from something that already is
 function drawWorld() {
     for (let y = 0; y < plantWorld.length; y++) {
         for (let x = 0; x < plantWorld[y].length; x++) {
@@ -191,7 +194,7 @@ function drawPlayer(id, screenX, screenY) {
 
 }
 
-// drawing using the character tileset (all directions and mvmt of a player)
+// drawing using the npc tileset (all directions and mvmt of a npc)
 function drawNPC(id, screenX, screenY) {
     push();
     translate(offsetX, offsetY);
@@ -218,7 +221,7 @@ function drawNPC(id, screenX, screenY) {
 
 }
 
-// drawing using the character tileset (all directions and mvmt of a player)
+// drawing using the animal tileset (all directions and mvmt of an animal)
 function drawAnimals(id, screenX, screenY) {
   push();
   translate(offsetX, offsetY);
@@ -267,7 +270,7 @@ function drawRecipe(id, screenX, screenY, progress) {
     );
     pop();
 }
-let validIds = [3, 82, 122, 120, 108, 110]
+
 // returns the program meaning behind an id
 function getState(screenX, screenY) {
     let id = getTileAtPosition(screenX, screenY);
@@ -280,7 +283,6 @@ function getState(screenX, screenY) {
     } else if (id == 38) {
         return "food";
     } else if (id == 48) {
-      console.log("a")
         return "stove";
     } else if (id == 135 || id ==  136 || id == 137) {
         return "cow";
@@ -323,4 +325,75 @@ function getTileAtPosition(screenX, screenY) {
         return plantWorld[arrayY][arrayX].id;
     }
     return -1;
+}
+
+// From class:
+let offsetX = 0;
+let offsetY = 0;
+
+function requestSlide(direction, speed) {
+
+  if (direction == "left") {
+    // no need to slide if the player is on the left side of the screen
+    if (player.x < width/2) {
+      return false;
+    }
+    // compute the x position of the right-most tile in our level
+    let rightMostX = plantWorld[0].length * tileSize + offsetX;
+    // if that position is off the right edge of the screen then we need to slide
+    if (rightMostX > width) {
+      offsetX -= speed;
+      return true;
+    }
+    // otherwise we have reached the end of the world - no more sliding
+    return false;
+  }
+  if (direction == "right") {
+    // no need to slide if the player is on the right side of the screen
+    if (player.x > width/2) {
+      return false;
+    }
+    // compute the x position of the left-most tile in our level
+    let leftMostX = 0 + offsetX;
+    // if that position is off the left edge of the screen then we need to slide
+    if (leftMostX < 0) {
+      offsetX += speed;
+      return true;
+    }
+    // otherwise we have reached the end of the world - no more sliding
+    return false;
+  }
+
+  if (direction == "up") {
+    // no need to slide if the player is on the left side of the screen
+    if (player.y < height/2) {
+      return false;
+    }
+    // compute the x position of the right-most tile in our level
+    let bottomMostY = plantWorld.length * tileSize + offsetY;
+    // if that position is off the right edge of the screen then we need to slide
+    if (bottomMostY > height) {
+      offsetY -= speed;
+      return true;
+    }
+    // otherwise we have reached the end of the world - no more sliding
+    return false;
+  }
+  if (direction == "down") {
+    // no need to slide if the player is on the bottom side of the screen
+    if (player.y > height/2) {
+      return false;
+    }
+    // compute the x position of the left-most tile in our level
+    let topMostY = 0 + offsetY;
+    // if that position is off the left edge of the screen then we need to slide
+    if (topMostY < 0) {
+      offsetY += speed;
+      return true;
+    }
+    // otherwise we have reached the end of the world - no more sliding
+    return false;
+  }
+
+  return false;
 }

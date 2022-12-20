@@ -59,6 +59,7 @@ function setupStoves() {
   }
 }
 
+// Configure stoves setup from local storage
 function setupUpdatedStoves(arr) {
   for (stove of arr) {
     let temp = new Stove(stove.x, stove.y, stove.on, stove.id, stove.progress, stove.recipe );
@@ -88,6 +89,7 @@ function cookOnStove(recipe) {
   }
 }
 
+// Remove item from stove once it's been collected
 function finishCooking(screenX, screenY) {
   let stoveNum = int(screenX / 32) - 4;
   if (stoves[stoveNum].on && stoves[stoveNum].progress >= 1) {

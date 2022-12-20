@@ -1,8 +1,9 @@
-// Player Variables
-
 let npcIds = [0,12,24,2,14,26];
+let npcs = [];
+let fakeNpcs = [];
+
 class NPC {
-  // Players have a default speed, do not carry a water can, and will grow potatoes
+  // NPC can move up and down and imageFactor tracks their graphic (one of seven ppl)
   constructor(x, y, imageFactor) {
     this.x = x;
     this.y = y;
@@ -12,7 +13,7 @@ class NPC {
     } else {
       this.imageFactor = imageFactor
     }
-    // Character tileset has three images in each direction.
+    // NPC tileset has three images in each direction.
     // Offset allows us to fluctuate between all three to mimic the animation of walking
     this.graphicOffset = 0;
     this.graphic = this.imageFactor;
@@ -23,12 +24,11 @@ class NPC {
   computeSensors() {
     this.middleX = int(this.x + tileSize / 2);
     this.middleY = int(this.y + tileSize / 2);
-    this.left = int(this.x - 2);
-    this.right = int(this.x + tileSize + 2);
     this.up = int(this.y - 2);
     this.down = int(this.y + tileSize + 2);
   }
 
+  // moving npcs
   moveAndDisplay() {
     this.computeSensors();
 
@@ -41,6 +41,7 @@ class NPC {
       }
     }
 
+    // buy item
     if (this.y <= plantWorld.length * tileSize - (tileSize * 7)){
       finishSelling(this.middleX, this.up + tileSize);
       this.on = false;
@@ -64,15 +65,13 @@ class NPC {
     drawNPC(this.graphic, this.x, this.y);   
   }
 
+  // non-moving npc
   display(){
     drawNPC(this.graphic, this.x, this.y);   
   }
 }
 
-let npcs = [];
-let fakeNpcs = [];
-
-// Configure booths setup
+// Configure npc setup
 function setupNPC() {
   for (let x = 32; x < 39; x++) {
     let temp = new NPC(x * tileSize, (plantWorld.length + 1) * tileSize);
@@ -84,7 +83,7 @@ function setupNPC() {
   }
 }
 
-// Show off the booths
+// Show off the npc
 function displayNPC() {
   for (npc of npcs) {
     npc.moveAndDisplay();
