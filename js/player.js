@@ -8,7 +8,7 @@ class Player {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.speed = 14;
+    this.speed = 10;
     this.water = false;
     this.currentSeed = "potatoes";
     // Character tileset has three images in each direction.
@@ -242,11 +242,11 @@ class Player {
     drawPlayer(this.graphic, this.x, this.y);
 
     // Close recipe book when out of range of the stoves
-    if (this.y < 80 || this.y > 110 || this.x < 40 || this.x > 180) {
-      recipe_book.classList.add("hidden");
-      cant_cook.classList.add("hidden");
-      cant_bake.classList.add("hidden");
-    }
+    // if (this.y < 80 || this.y > 110 || this.x < 40 || this.x > 180) {
+    //   recipe_book.classList.add("hidden");
+    //   cant_cook.classList.add("hidden");
+    //   cant_bake.classList.add("hidden");
+    // }
   }
 }
 

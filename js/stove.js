@@ -43,8 +43,8 @@ class Stove {
 
 // Configure stoves setup
 function setupStoves() {
-  for (let x = 2; x < 6; x++) {
-    let temp = new Stove(x, 2);
+  for (let x = 4; x < 10; x++) {
+    let temp = new Stove(x, 5);
     stoves.push(temp);
   }
 }
@@ -52,7 +52,7 @@ function setupStoves() {
 // Show off the stoves
 function displayStoves() {
   for (stove of stoves) {
-    // drawTile(stove.id, stove.x * tileSize, stove.y * tileSize);
+    drawTile(stove.id, stove.x * tileSize, stove.y * tileSize);
     if (stove.on) {
       stove.displayCookingProgress();
     }
@@ -61,8 +61,7 @@ function displayStoves() {
 
 // Allow for cokoking based on recipe
 function cookOnStove(recipe) {
-  let stoveNum = constrain(int(map(player.x, 48, 180, 0, 4)), 0, 3);
-
+  let stoveNum = int(map(player.x, tileSize * 3.7, tileSize * 9.5, 0, 6));
   let stove = stoves[stoveNum];
   if (stove.on) {
     return false;
@@ -73,7 +72,7 @@ function cookOnStove(recipe) {
 }
 
 function finishCooking(screenX, screenY) {
-  let stoveNum = int(screenX / 32) - 2;
+  let stoveNum = int(screenX / 32) - 4;
   if (stoves[stoveNum].on && stoves[stoveNum].progress >= 1) {
     stoves[stoveNum].turnOff();
   }
