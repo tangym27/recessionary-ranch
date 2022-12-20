@@ -11,7 +11,7 @@ let bottleCount;
 function setup() {
 	// create dynamic texture canvas
 	cowCanvas = createCanvas(512,512).id();
-	localStorage.setItem("cowGameOver", false);
+	localStorage.setItem("cowGameOver", "false");
 	collectCount = 0;
     bottleCount = 0;
 	// load sound
@@ -29,12 +29,6 @@ function setup() {
 
 	// add the plane to our world
 	cowWorld.add(g);
-
-	// add sky
-	//sky = new Sky({
-		//asset: 'field'
-	//});
-	//world.add(sky);
 
 	// add 3D cow
 	cow = new GLTF({
@@ -62,87 +56,22 @@ function setup() {
 
 		red: 218, green: 165, blue: 32,
 		clickFunction: function() {
-			localStorage.setItem("cowGameOver", true);
-			}
+			localStorage.setItem("cowGameOver", "true");
+		}
 	});
 	cowWorld.add(exitButton);
-    	// add octahedron with dynamic texture at origin of world
-    	/*
-
-	oct = new Octahedron({
-    x: 3, y: 3, z: 3,
-	radius: 0.5,
-	side: 'double',
-	asset: canvas,
-	dynamicTexture: true,
-	dynamicTextureWidth: 512,
-	dynamicTextureHeight: 512
-	});
-	world.add(oct);
-	*/
-	// add bricks at corners of "world" with everything inside
-	/*
-
-	let brick1 = new Box({
-		x: -5, y: 1, z:-5,
-		asset: 'brick',
-		clickFunction: function(brick) {
-			world.slideToObject(brick, 1000);
-		}
-	});
-
-	let brick2 = new Box({
-		x: -5, y: 1, z:5,
-		asset: 'brick',
-		clickFunction: function(brick) {
-			world.slideToObject(brick, 1000);
-		}
-	});
-
-	let brick3 = new Box({
-		x: 5, y: 1, z:-5,
-		asset: 'brick',
-		clickFunction: function(brick) {
-			world.slideToObject(brick, 1000);
-		}
-	});
-
-	let brick4 = new Box({
-		x: 5, y: 1, z:5,
-		asset: 'brick',
-		clickFunction: function(brick) {
-			world.slideToObject(brick, 1000);
-		}
-	});
-
-	world.add(brick1);
-	world.add(brick2);
-	world.add(brick3);
-	world.add(brick4);
-
-	// add octahedron with dynamic texture at origin of world
-	oct = new Octahedron({
-		x: 0, y: 0.5, z: 0,
-		radius: 0.5,
-		side: 'double',
-		asset: canvas,
-		dynamicTexture: true,
-		dynamicTextureWidth: 512,
-		dynamicTextureHeight: 512
-	});
-	world.add(oct);
-
+    	
 	// add halo above cow's head
 	halo = new Torus({
-		x: 1.15, y: 1.4, z: -2.2,
+		x: 1.15, y: 1.9, z: -2.2,
 		radius: 0.2,
 		radiusTubular: 0.01,
 		side: 'double',
 		red: 218, green: 165, blue: 32,
 		rotationX: -90
 	});
-	world.add(halo);
-    */
+	cowWorld.add(halo);
+    
 	// set user's initial position slightly above origin
 	cowWorld.setUserPosition(0,1,0);
 
@@ -151,10 +80,16 @@ function setup() {
 		let milk = new cowMilk(random(-4.75,4.75),random(5.7),random(-4.75,4.75));
 		milkDrops.push(milk);
 	}
-	
 }
 
 function draw() {
+	if (localStorage.getItem("cowGameStarted")=="true") {
+		collectCount = 0;
+	    bottleCount = 0;
+	    cowWorld.setUserPosition(0,1,0);
+	    localStorage.setItem("cowGameStarted", "false");
+	}
+
 	// milk drops move
 	for (let i=0; i<milkDrops.length; i++) {
 		milkDrops[i].move();
@@ -174,7 +109,7 @@ function draw() {
 	text("Click Yellow Box to Exit!", 50,200);
 
 	if (collectCount  == 50){
-	    localStorage.setItem("cowGameOver", true);
+	    localStorage.setItem("cowGameOver", "true");
 	}
 	//circle(random(512), random(512), random(5,30));
 }
@@ -200,7 +135,7 @@ class cowMilk {
 			radius: 0.05,
 			rotationX: 90,
 			clickFunction: function(s) {
-				changeColor(s);
+				changePosition(s);
 				// console.log("sphere");
 			}
 		})
@@ -215,7 +150,7 @@ class cowMilk {
 			red: 255, green: 253, blue: 208,
 			rotationX: 180,
 			clickFunction: function(c) {
-				changeColor(c);
+				changePosition(c);
 				// console.log("cone");
 			}
 		})
@@ -226,27 +161,23 @@ class cowMilk {
 
 	move() {
 		// move drop down gradually so it "falls"
-		this.container.nudge(0, this.speed, 0)
-		// console.log(this.container.y);
+		this.container.nudge(0, this.speed, 0);
 
 		// reset position and color when drop hits the "ground"
 		if (this.container.getY() <= 0) {
 			this.container.setY(random(5,7))
-			this.dropCone.setColor(255,253,208);
-			this.dropSphere.setColor(255,253,208);
 		}
 	}
 }
 
-// drop changes color and plays a drop sound when clicked
-function changeColor(obj) {
+// drop plays a drop sound and is recycled when clicked
+function changePosition(obj) {
     collectCount += 1;
 	drop.play();
 
 	for (milk of milkDrops) {
 		if (milk.dropCone == obj || milk.dropSphere == obj) {
-			milk.dropCone.setY(-100);
-			milk.dropSphere.setY(-100);
+			milk.container.setY(random(5,7));
 		}
 	}
 }

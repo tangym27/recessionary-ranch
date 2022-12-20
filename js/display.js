@@ -48,10 +48,7 @@ let world = [
   [78, 3, 3, 39, 39, 3, 3, 39, 39, 3, 3, 39, 39, 3, 3, 39, 39, 3, 81, 81, 81, 83, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82],
   [77, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 81, 81, 81, 83, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82],
   [77, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 81, 81, 81, 83, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82, 82],
-
-
 ];
-
 
 // booths:  52, 52, 52, 52,
 // dynamic layer - growing seed, plants, etc.
@@ -120,6 +117,20 @@ function setupPlantWorld() {
     }
 }
 
+function setupUpdatedPlantWorld(arr){
+    for (let y = 0; y < world.length; y++) {
+        let pCol = [];
+        for (let x = 0; x < world[y].length; x++) {
+            // creating plant object to be able to update graphics for plants easily
+            let p = arr[y][x];
+            let p2 = new Plant(p.arrayX, p.arrayY, p.id, p.growthTime, p.currentGrowth, p.flowerId, p.hasFlowers, p.matured, p.seedPosition, p.seedName);
+            pCol.push(p2);
+        }
+        plantWorld.push(pCol);
+    }    
+
+
+}
 // draws world with dynamic plant objects
 // does not need to be offset bc it is called from something that already is
 function drawWorld() {

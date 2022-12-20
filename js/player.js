@@ -1,7 +1,7 @@
 // Player Variables
 let player;
 let playerId = 4;
-let profit = 50;
+let profit = 40;
 
 class Player {
   // Players have a default speed, do not carry a water can, and will grow potatoes
@@ -58,8 +58,7 @@ class Player {
             openSellingMenu();
             break;
           case "cow":
-            // gameState = "cowGame";
-            player.y = player.y + tileSize;
+            // player.y = player.y + tileSize;
             this.graphic = [0, 4, 8][this.graphicOffset];
             this.direction = "down";
             swapCanvasIframe();

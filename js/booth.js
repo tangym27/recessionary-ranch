@@ -15,12 +15,12 @@ class Booth {
     this.on = true;
     this.recipe = recipe;
     cookedInventory[this.recipe.name]--;
+    profit += this.recipe.price;
   }
 
   // Reset booth settings
   turnOff() {
     this.on = false;
-    profit += this.recipe.price;
   }
 
   // Show development of selling
