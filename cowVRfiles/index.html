@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en-us">
+	<head>
+		<meta charset="UTF-8">
+		<title>Assignment #6 VR World</title>
+
+		<!-- p5 core library -->
+    	<script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.js"></script>
+
+		<!-- A-Frame core library -->
+		<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+
+		<!-- AFrameP5 library -->
+		<script src="https://craignyu.github.io/aframep5/libraries/aframep5-v2.1.js"></script>
+
+		<!-- P5 sound library -->
+		<script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/addons/p5.sound.min.js"></script>
+
+		<!-- Your p5 Sketch -->
+		<script src="cowSketch.js"></script>
+
+		<!-- custom styles -->
+		<style>
+			body {
+				padding: 0;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+
+		<!-- container to hold our VR scene - make sure to give this element an ID of 'VRScene' -->
+	    <a-scene id="VRScene">
+
+				<a-assets id="VRAssets">
+					<!-- https://pixexid.com/image/a-large-green-field-with-a-building-in-the-background-parklands-old-house-kjuhmomy -->
+					<img src="assets/360_field.jpeg" id="field">
+
+					<!-- https://www.pngwing.com/en/free-png-yyefu/ -->
+					<img src="assets/brick.png" id="brick">
+
+					<!-- "Cow" (https://skfb.ly/ZNH9) by pixelbutterfly is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/). -->
+					<a-asset-item id="cow" src="assets/cow/scene.gltf"></a-asset-item>
+				</a-assets>
+
+	    </a-scene>
+
+	</body>
+</html>
