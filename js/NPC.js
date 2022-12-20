@@ -1,15 +1,21 @@
 // Player Variables
 
-
+let npcIds = [0,12,24,2,14,26];
 class NPC {
   // Players have a default speed, do not carry a water can, and will grow potatoes
-  constructor(x, y) {
+  constructor(x, y, imageFactor) {
     this.x = x;
     this.y = y;
     this.speed = random(3,5) * random(.5,.8);
+    if (imageFactor == undefined){
+      this.imageFactor = random(npcIds);
+    } else {
+      this.imageFactor = imageFactor
+    }
     // Character tileset has three images in each direction.
     // Offset allows us to fluctuate between all three to mimic the animation of walking
     this.graphicOffset = 0;
+    this.graphic = this.imageFactor;
     this.on = false;
   }
 
@@ -31,6 +37,7 @@ class NPC {
         this.direction = "up";
       } else {
         this.y = (plantWorld.length + 1)* tileSize;
+        this.imageFactor = random([0,12,24,2,14,26]);
       }
     }
 
@@ -42,11 +49,11 @@ class NPC {
 
     if (this.direction == "up"){
       this.y -= this.speed;
-      this.graphic = [2, 6, 10][this.graphicOffset];
+      this.graphic = [1 + this.imageFactor, 5 + this.imageFactor, 9 + this.imageFactor][this.graphicOffset];
     } else if (this.direction == "down"){
 
       this.y += this.speed;
-      this.graphic = [0, 4, 8][this.graphicOffset];
+      this.graphic = [0 + this.imageFactor, 4 + this.imageFactor, 8 + this.imageFactor][this.graphicOffset];
     }
 
     this.graphicOffset++;
@@ -56,9 +63,14 @@ class NPC {
 
     drawNPC(this.graphic, this.x, this.y);   
   }
+
+  display(){
+    drawNPC(this.graphic, this.x, this.y);   
+  }
 }
 
 let npcs = [];
+let fakeNpcs = [];
 
 // Configure booths setup
 function setupNPC() {
@@ -66,12 +78,20 @@ function setupNPC() {
     let temp = new NPC(x * tileSize, (plantWorld.length + 1) * tileSize);
     npcs.push(temp);
   }
+  for (let x = 23; x < 30; x++) {
+    let temp = new NPC(x * tileSize, (plantWorld.length + 1) * tileSize - 190, npcIds[x-23]);
+    fakeNpcs.push(temp);
+  }
 }
 
 // Show off the booths
 function displayNPC() {
   for (npc of npcs) {
     npc.moveAndDisplay();
+  }
+  for (npc of fakeNpcs){
+    npc.display();
+
   }
 }
 

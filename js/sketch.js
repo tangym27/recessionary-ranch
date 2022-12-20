@@ -19,7 +19,8 @@ let tilesetArtwork,
   milkPic,
   poopPic,
   bucketPic,
-  NPCArtwork;
+  NPCArtwork,
+  chickenArtwork;
 
 // Start Screen artwork variables
 let carrotPic,
@@ -106,6 +107,7 @@ function preload() {
   NPCArtwork = loadImage("images/npc.png");
   characterArtwork = loadImage("images/character.png");
   foodArtwork = loadImage("images/food.png");
+  chickenArtwork = loadImage("images/chicken_walk.png");
   cloud = loadImage("images/cloud.png");
   cowPic = loadImage("images/cow.png");
   milkPic = loadImage("images/milk.png");
@@ -168,6 +170,7 @@ function setup() {
   setupStoves();
   setupBooths();
   setupNPC();
+  setupAnimals();
 
   // setting up cow game
   cowGameState = false;
@@ -226,6 +229,7 @@ function draw() {
     displayInventory();
     displayBooths();
     displayNPC();
+    displayAnimals();
     player.moveAndDisplay();
 
     // achievement popup windows
@@ -400,6 +404,7 @@ function openMenu() {
     closeNoSeeds();
     recipe_book.classList.remove("hidden");
     seed_panel.classList.add("hidden");
+    cooked_inventory.classList.add("hidden");
   } else {
     recipe_book.classList.add("hidden");
     cant_cook.classList.add("hidden");
