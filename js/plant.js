@@ -37,16 +37,17 @@ class Plant {
   }
 
   display() {
-    if (this.seedPosition != -1 && this.currentGrowth >= this.growthTime) {
+    while (this.seedPosition != -1 && this.currentGrowth >= this.growthTime) {
+      if (this.seedPosition >= 3) {
+        this.matured = true;
+      }
       // grow here.
       if (!this.matured) {
         this.grow();
       }
-      this.currentGrowth = 0;
+      this.currentGrowth -= this.growthTime;
     }
-    if (this.seedPosition >= 3) {
-      this.matured = true;
-    }
+    
     this.currentGrowth++;
     if (this.seedPosition != -1) {
       drawTile(dirtId, this.arrayY * tileSize, this.arrayX * tileSize);

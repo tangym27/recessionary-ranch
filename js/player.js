@@ -58,8 +58,7 @@ class Player {
             openSellingMenu();
             break;
           case "cow":
-            // gameState = "cowGame";
-            player.y = player.y + tileSize;
+            // player.y = player.y + tileSize;
             this.graphic = [0, 4, 8][this.graphicOffset];
             this.direction = "down";
             swapCanvasIframe();

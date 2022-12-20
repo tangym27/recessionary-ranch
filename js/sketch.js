@@ -1,5 +1,7 @@
 let canvas;
 let size = 640;
+let currentTime = new Date().getTime();
+
 // Inventory Variables
 const seed_panel = document.getElementById("seed_panel");
 const recipe_book = document.getElementById("recipe_book");
@@ -49,11 +51,7 @@ let gameState, cowGameState;
 let recipe, recipeName, canCook;
 
 // Achievement Variables
-let achievement0 = false;
-let achievement1 = false;
-let achievement2 = false;
-let achievement3 = false;
-let achievement4 = false;
+let achieved = [false,false,false,false,false];
 const cookedSet = new Set();
 
 // cow game variables
@@ -70,14 +68,14 @@ let cowBGMStart = false;
 
 // Player inventory - increases when harvesting and decreases when cooking
 let inventory = {
-  potatoes: 10,
-  tomatoes: 10,
-  lettuce: 10,
-  carrots: 10,
-  strawberries: 10,
-  watermelons: 10,
-  pumpkins: 10,
-  milk: 10,
+  'potatoes': 10,
+  'tomatoes': 10,
+  'lettuce': 10,
+  'carrots': 10,
+  'strawberries': 10,
+  'watermelons': 10,
+  'pumpkins': 10,
+  'milk': 10,
 };
 
 let seedInventory = {
@@ -166,22 +164,47 @@ function setup() {
 
   // setup our configurations
   setupRecipes();
-  setupPlantWorld();
+
+  // check for saved plants
+  // if (localStorage.getItem('plantWorld')) {
+  //   plantWorld = JSON.parse(localStorage.getItem('plantWorld'));
+  // } else {
+    setupPlantWorld();
+  // }
+
+  // grow plants based on time elapsed since last time played
+  // if (localStorage.getItem('lastPlayed')) {
+  //   let diff = currentTime - int(localStorage.getItem('lastPlayed'));
+  //   let frames = (diff*60)/1000;
+  //   for (plant of plantWorld) {
+  //     if (plant.id > 5 && plant.id != 49 && plant.id != 51 && 
+  //       plant.id != 24 && plant.id != 25 && plant.id != 26 && plant.id != 36) {
+  //       plant.currentGrowth += frames;
+  //     }
+  //   }
+  // }
+
   setupStoves();
   setupBooths();
   setupNPC();
   setupAnimals();
 
-  // setting up cow game
-  cowGameState = false;
-  myCow = new Cow(10, 10);
-  myBucket = new Bucket(300, 580);
-  for (let i = 0; i < 10; i++) {
-    milks.push(new Milk());
+  // get any inventory/profit from previous play
+  // if (localStorage.getItem('seedInventory')) {
+  //   seedInventory = JSON.parse(localStorage.getItem('seedInventory'));
+  // }
+  // if (localStorage.getItem('cookedInventory')) {
+  //   cookedInventory = JSON.parse(localStorage.getItem('cookedInventory'));
+  // }
+  if (localStorage.getItem('inventory')) {
+    inventory = JSON.parse(localStorage.getItem('inventory'));
   }
-  for (let i = 0; i < 20; i++) {
-    poops.push(new Poop());
+  if (localStorage.getItem('profit')) {
+    profit = int(localStorage.getItem('profit'));
   }
+  // if (localStorage.getItem('achieved')) {
+  //   achieved = JSON.parse(localStorage.getItem('achieved'));
+  // }
 
   // set up start screen
   for (let i = 0; i < 8; i++) {
@@ -205,6 +228,7 @@ function setup() {
 
 function draw() {
   clear();
+  currentTime = new Date().getTime();
 
   if (gameState == "startScreen") {
     background(169, 227, 255);
@@ -233,34 +257,48 @@ function draw() {
     player.moveAndDisplay();
 
     // achievement popup windows
-    if (profit >= 50 && achievement0 == false) {
+    if (profit >= 50 && achieved[0] == false) {
       document.getElementById("achievement0").classList.remove("hidden");
     }
 
-    if (profit >= 100 && achievement1 == false) {
+    if (profit >= 100 && achieved[1] == false) {
       document.getElementById("achievement0").classList.add("hidden");
       document.getElementById("achievement1").classList.remove("hidden");
     }
 
-    if (profit >= 500 && achievement2 == false) {
+    if (profit >= 500 && achieved[2] == false) {
       document.getElementById("achievement1").classList.add("hidden");
       document.getElementById("achievement2").classList.remove("hidden");
     }
 
-    if (profit >= 1000 && achievement3 == false) {
+    if (profit >= 1000 && achieved[3] == false) {
       document.getElementById("achievement2").classList.add("hidden");
       document.getElementById("achievement3").classList.remove("hidden");
     }
 
-    if (cookedSet.size == 8 && achievement4 == false) {
+    if (cookedSet.size == 8 && achieved[4] == false) {
       document.getElementById("achievement4").classList.remove("hidden");
     }
-  } else if (gameState == "cowGame") {
-    image(cloud, 0, 0);
-    cowGameStart();
-  } else if (gameState == "endCowGame") {
-    cowGameEnd();
-  }
+
+    // check if cow game is over
+    cowGameState = localStorage.getItem('cowGameOver');
+    if (cowGameState=="true") {
+      swapCanvasIframe();
+      localStorage.setItem('cowGameOver', "false");
+      localStorage.setItem("cowGameStarted", "true");
+      inventory['milk'] += int(localStorage.getItem('cowGameBottles'));
+      localStorage.setItem('cowGameBottles', 0);
+    }
+
+    // save state of game by setting localStorage
+    localStorage.setItem('plantWorld', JSON.stringify(plantWorld));
+    localStorage.setItem('seedInventory', JSON.stringify(seedInventory));
+    localStorage.setItem('cookedInventory', JSON.stringify(cookedInventory));
+    localStorage.setItem('inventory', JSON.stringify(inventory));
+    localStorage.setItem('lastPlayed', currentTime);
+    localStorage.setItem('profit', profit);
+    localStorage.setItem('achieved', JSON.stringify(achieved));
+  } 
 }
 
 // HTML interactions
@@ -436,21 +474,21 @@ function closeAchievement() {
   if (profit >= 50) {
     if (profit >= 1000) {
       document.getElementById("achievement3").classList.add("hidden");
-      achievement3 = true;
+      achieved[3] = true;
     } else if (profit >= 500) {
       document.getElementById("achievement2").classList.add("hidden");
-      achievement2 = true;
+      achieved[2] = true;
     } else if (profit >= 100) {
       document.getElementById("achievement1").classList.add("hidden");
-      achievement1 = true;
+      achieved[1] = true;
     }
     document.getElementById("achievement0").classList.add("hidden");
-    achievement0 = true;
+    achieved[0] = true;
   }
 
   if (cookedSet.size >= 8) {
     document.getElementById("achievement4").classList.add("hidden");
-    achievement4 = true;
+    achieved[4] = true;
   }
 }
 
