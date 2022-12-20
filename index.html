@@ -5,7 +5,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/addons/p5.sound.min.js"></script>
 
-
     <title>Recessionary Ranch</title>
     <link rel="stylesheet" href="styles.css" />
     <style></style>
@@ -17,8 +16,93 @@
       <h2>Erin Choi, Tiffany (Thinzar) Lin, Michelle Tang</h2>
     </header>
 
-
     <main>
+      <div id="documentation">
+        <h2>About the Game</h2>
+        <p>
+          Our updated farming game is inspired by calming, casual games with low-stakes farming and cooking mechanics, such as Stardew Valley, Smurfs' Village, and Cats & Soup. It builds on an earlier prototype of the game (<a href="https://i6.cims.nyu.edu/~eyc321/interactive/midterm/">Midterm Project</a>). The Revamped Recessionary Ranch now includes an expanded overworld for you to explore, ways to spend your money, a VR minigame, visual enhancements, and saving your progress.
+        </p>
+
+        <h2>Game Concept</h2>
+        <p>
+          A recession is about to begin, and your plans to find a new job have been soiled. You're about to lose hope when, suddenly, you stumble upon the perfect plot of land for starting your own farm, complete with a bag of seeds, soil ready for cultivation, a watering can and a lake, and a giant cow. There's even a kitchen where you can cook dishes using the crops you grow and a marketplace! Make as much money as you can and sustain your farm to prepare for the recession by growing and harvesting crops, cooking dishes, and selling them. Unlock achievements along the way based on what you cook and how much you earn!
+        </p>
+
+        <h2>How to Play</h2>
+        <p>
+          Please have your browser window set to at least 1000 pixels wide for the best experience!
+        </p>
+        <p>
+          Use the WASD keys on your keyboard to move. (W = up, A = left, S = down, D = right)
+        </p>
+        <p>
+          The status window to the right of the game screen can be used to track your total profit, what seed you're currently planting, how full your watering can is, and your ingredient inventory (how many of each ingredient you currently have).
+        </p>
+
+        <div id="instructions_cols">
+          <div>
+            <h3>Planting, Growing, Harvesting, Buying</h3>
+            <ul>
+              <li>
+                Press P to toggle the pop-up window that shows you what seeds you can plant and how many seeds you have for each ingredient. Click the image of the ingredient you want to plant.
+              </li>
+              <li>
+                Walk up to a plot of soil and press SPACE to plant a seed. Wait while the plant goes through 4 stages of growth - when it's fully matured and looks as it appears in the inventory or seed window, press SPACE in front of it to harvest it.
+              </li>
+              <li>
+                You can speed up the growth of your crops by watering them. Walk up to the pond and press SPACE to fill your watering can. Walk up to a plant and press SPACE to water it.
+              </li>
+              <li>
+                Plants can be watered as many times as you want until they're fully grown. However, your water is limited - you can only water plants 5 times before the watering can is empty again!
+              </li>
+              <li>
+                If you run out of seeds for any plant, head to the marketplace in the bottom right of the farm. Walk up to the seed stall (left stall) and press SPACE in front of the crate of the ingredient you need more seeds for. Once you buy a seed for $1, your seed bag will display your updated seed total.
+              </li>
+              <li>
+                Running out of soil plots? You can purchase more in the bottom left area of the farm! Each column of 5 plots is $20. Walk up to a picket and press SPACE to purchase the column of plots above it.
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3>Udderly Amoosing Cow Game</h3>
+            <p>You can only obtain milk through this VR minigame!</p>
+            <ul>
+              <li>
+                Walk up to the holy cow surrounded by flower trees inside the fenced pen at the top right of the farm. Press SPACE next to the cow to begin the VR minigame. You'll be transported to a 3D world!
+              </li>
+              <li>
+                Use your mouse to rotate your view, and click on and collect the drops of milk falling from the sky. 5 drops makes 1 bottle of milk! You can see how much milk you've collected on the display board next to the cow.
+              </li>
+              <li>
+                Collect 10 milk bottles' worth of milk drops to end the game automatically and return to the farm. If you want to end the game early, press on the yellow box just below the display board. 
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3>Cooking and Selling</h3>
+            <ul>
+              <li>
+                Walk up to a stove in the kitchen at the top left of the farm and press SPACE to open the recipe book. Click the image of the recipe you want to cook.
+              </li>
+              <li>
+                If you have enough ingredients, the dish will appear on the table behind the stove being used and slowly grow larger as it is being prepared.
+              </li>
+              <li>
+                When the dish stops growing larger, it's ready to be collected! Walk up to the table with the completed dish and press SPACE to add it to your inventory of dishes to sell. 
+              </li>
+              <li>
+                Walk to the marketplace at the bottom right of the farm and stand by an empty booth in the serving stall (right stall). Press SPACE to open a menu of dishes you can sell and click the image of the dish you want to sell. The dish will sell for its fixed cost (listed in the recipe book), and a happy customer will come to pick up the food!
+              </li>
+              <li>
+                Achievements you can unlock include surpassing $50, $100, $500, and $1000 in profit as well as cooking each dish in the recipe book at least once.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       <div id="game_and_inventory">
         <div id="game">
             <iframe id="vr" class="hidden" src="cowVRfiles/index.html" width="640" height="640" title="VR Cow Game."></iframe>
