@@ -31,8 +31,8 @@ class Booth {
 
 // Configure booths setup
 function setupBooths() {
-  for (let x = 2; x < 6; x++) {
-    let temp = new Booth(x, 16);
+  for (let x = 32; x < 39; x++) {
+    let temp = new Booth(x, 32);
     booths.push(temp);
   }
 }
@@ -40,7 +40,6 @@ function setupBooths() {
 // Show off the booths
 function displayBooths() {
   for (booth of booths) {
-    drawTile(booth.id, booth.x * tileSize, booth.y * tileSize);
     if (booth.on) {
       booth.displaySellingProgress();
     }
@@ -49,8 +48,7 @@ function displayBooths() {
 
 // Allow for cokoking based on recipe
 function sellOnBooth(recipe) {
-  let boothNum = constrain(int(map(player.x, 48, 180, 0, 4)), 0, 3);
-
+  let boothNum = constrain(int(map(player.x + offsetX, -276, -276 + (tileSize * 7), 0, 7)), 0, 7);
   let booth = booths[boothNum];
   turnOnNPC(boothNum);
   if (booth.on) {
@@ -62,7 +60,7 @@ function sellOnBooth(recipe) {
 }
 
 function finishSelling(screenX, screenY) {
-  let boothNum = int(screenX / 32) - 2;
+  let boothNum = int(screenX / 32) - 32;
   if (booths[boothNum].on) {
     booths[boothNum].turnOff();
   }

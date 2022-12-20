@@ -39,7 +39,6 @@ class Recipe {
 
   // TODO: comments
   canSell() {
-    console.log(this.name);
     return cookedInventory[this.name] > 0;
   }
 

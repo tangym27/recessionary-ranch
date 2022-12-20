@@ -1,5 +1,5 @@
 let canvas;
-
+let size = 640;
 // Inventory Variables
 const seed_panel = document.getElementById("seed_panel");
 const recipe_book = document.getElementById("recipe_book");
@@ -152,7 +152,7 @@ function preload() {
 }
 
 function setup() {
-  canvas = createCanvas(1280,1280).id("canvas");
+  canvas = createCanvas(size, size).id("canvas");
   canvas.parent("#game");
   background(0);
 
