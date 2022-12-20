@@ -114,7 +114,7 @@ function checkPlant(screenX, screenY) {
     // water reduces remaining growth time by half
     let remainingTime = p.growthTime - p.currentGrowth;
     p.currentGrowth += remainingTime / 2;
-    player.water = false;
+    player.water -= 1;
   } else if (crops[p.seedName] == undefined){
     console.log(p.seedName + " is not a crop");
   }
